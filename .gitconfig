@@ -1,0 +1,32 @@
+[core]
+    autocrlf = false
+    editor = vim
+    excludesfile = ~/.gitignore
+    filemode = false
+    fscache = true
+    repositoryformatversion = 0
+    whitespace = cr-at-eol
+[alias]
+    a = commit --amend --no-edit
+    co = checkout
+    d = diff --full-index
+    lg = log --graph --pretty=format:'%Cred%h%Creset - %C(cyan)<%an>%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit --color
+    re = rebase
+    rr = rebase -i @{u}
+    stat = status -s -u --branch
+    s = status -s -u --branch
+[push]
+    default = current
+[rerere]
+    enabled = true
+[pull]
+    rebase = true
+[fetch]
+    prune = true
+[diff]
+    renameLimit = 999999
+[merge]
+    renameLimit = 999999
+[user]
+    email = queueball314159@gmail.com
+    name = queueball

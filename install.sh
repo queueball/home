@@ -20,3 +20,6 @@ echo "set guifont=Meslo\ LG\ L\ for\ Powerline:h11" >> ~/.gvimrc
 echo "Symlink vim files"
 ln -s ~/home/.vim ~/.vim
 ln -s ~/home/.vimrc ~/.vimrc
+
+echo "Symlink gitconfig"
+# ln -s ~/home/.gitconfig ~/.gitconfig
