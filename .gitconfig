@@ -15,6 +15,8 @@
     rr = rebase -i @{u}
     stat = status -s -u --branch
     s = status -s -u --branch
+    sho = show --color --full-index --ignore-space-change
+    stat = status -s -u --branch
 [push]
     default = current
 [rerere]
