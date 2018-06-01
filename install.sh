@@ -3,7 +3,6 @@ echo "Creating pathogen directories"
 mkdir -p ~/home/.vim/autoload ~/home/.vim/bundle && curl -LSso ~/home/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 echo "Cloning useful plugins"
-git clone https://github.com/kien/ctrlp.vim.git ~/home/.vim/bundle/ctrlp.vim
 git clone --recursive https://github.com/davidhalter/jedi-vim.git ~/home/.vim/bundle/jedi-vim
 git clone git://github.com/tpope/vim-repeat.git ~/home/.vim/bundle/vim-repeat
 git clone git://github.com/tpope/vim-surround.git ~/home/.vim/bundle/vim-surround
