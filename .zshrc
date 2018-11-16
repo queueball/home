@@ -91,3 +91,4 @@ bindkey '\C-x\C-e' edit-command-line
 
 alias mygdf='gdf -H --output=source,avail /dev/disk1s1'
 alias ll='ls -alh'
+alias trans='transmission-remote'
