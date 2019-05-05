@@ -47,6 +47,7 @@ setopt PROMPTPERCENT
 #setopt AUTO_CD
 setopt NUMERIC_GLOB_SORT
 setopt EXTENDED_GLOB
+setopt interactivecomments
 
 # ┌─┐
 # │ │
@@ -92,3 +93,6 @@ bindkey '\C-x\C-e' edit-command-line
 alias mygdf='gdf -H --output=source,avail /dev/disk1s1'
 alias ll='ls -alh'
 alias trans='transmission-remote'
+alias transr='transmission-remote -t all -r'
+alias transa='transmission-remote -a'
+alias transl='transmission-remote -l'
