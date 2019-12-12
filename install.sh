@@ -26,3 +26,22 @@ echo "Symlink gitconfig"
 
 echo "Symlink zsh files"
 ln -s ~/home/.zshrc ~/.zshrc
+
+echo "Installing brew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install cask
+brew install vim
+brew link --overwrite vim
+brew install python3
+brew install transmission-cli &&  brew services start transmission-cli
+brew install syncthing && brew services start syncthing
+brew install watch
+brew install ffmpeg
+brew install imagemagick
+brew install coreutils
+
+brew cask install opera
+brew cask install vlc
+brew cask install macvim
+brew cask install steam
