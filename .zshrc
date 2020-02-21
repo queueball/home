@@ -76,9 +76,8 @@ function set_end() { echo $'%{\e[0m%}' }
 PROMPT=$'$(set_white)┌ $(set_yellow)%n$(set_red)@$(set_white)%m$(set_green)%# $(set_cyan)%~ $(set_white)──>$(set_end)
 $(set_white)└> $(set_end)'
 
-export GOPATH=$HOME/.tech/gocode
-export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/bin:$PATH"
+export PATH="$PATH:$HOME/.tech/bash"
 export PATH="$PATH:$HOME/.bin"
 
 tabs -2
@@ -96,3 +95,4 @@ alias trans='transmission-remote'
 alias transr='transmission-remote -t all -r'
 alias transa='transmission-remote -a'
 alias transl='transmission-remote -l'
+alias reload='source ~/.zshrc'
