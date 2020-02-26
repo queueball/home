@@ -23,6 +23,7 @@ echo "Symlink gitconfig"
 # ln -s ~/home/.gitconfig ~/.gitconfig
 
 echo "Symlink zsh files"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -s ~/home/.zshrc ~/.zshrc
 
 echo "Installing brew"
