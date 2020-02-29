@@ -16,7 +16,7 @@ plugins=(
   encode64
   python
   sudo
-  vi-mode
+  # vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
