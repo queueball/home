@@ -9,6 +9,7 @@ git clone https://github.com/vim-airline/vim-airline ~/home/.vim/bundle/vim-airl
 git clone https://github.com/vim-airline/vim-airline-themes ~/home/.vim/bundle/vim-airline-themes
 git clone https://github.com/nvie/vim-flake8 ~/home/.vim/bundle/vim-flake8
 git clone git://github.com/tpope/vim-vinegar.git ~/home/.vim/bundle/vim-vinegar
+git clone https://github.com/Valloric/YouCompleteMe.git ~/home/.vim/bundle/YouCompleteMe
 
 echo "Cloning & installing useful fonts"
 git clone https://github.com/powerline/fonts.git ~/home/.vim/fonts/
@@ -39,8 +40,13 @@ brew install watch
 brew install ffmpeg
 brew install imagemagick
 brew install coreutils
+brew install cmake
 
 brew cask install opera
 brew cask install vlc
 brew cask install macvim
 brew cask install steam
+
+# cd ~/home/.vim/bundle/YouCompleteMe
+# git submodule update --init --recursive
+# python3 install.py --all
