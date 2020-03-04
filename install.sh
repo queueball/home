@@ -50,3 +50,4 @@ brew cask install steam
 # cd ~/home/.vim/bundle/YouCompleteMe
 # git submodule update --init --recursive
 # python3 install.py --all
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
