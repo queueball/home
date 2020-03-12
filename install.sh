@@ -47,7 +47,6 @@ brew cask install vlc
 brew cask install macvim
 brew cask install steam
 
-# cd ~/home/.vim/bundle/YouCompleteMe
-# git submodule update --init --recursive
-# python3 install.py --all
+git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
+python3 ~/home/.vim/bundle/YouCompleteMe/install.py --all
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
