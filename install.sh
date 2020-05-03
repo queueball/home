@@ -41,6 +41,7 @@ brew install ffmpeg
 brew install imagemagick
 brew install coreutils
 brew install cmake
+brew install fswatch
 
 brew cask install opera
 brew cask install vlc
