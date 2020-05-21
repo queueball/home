@@ -44,9 +44,11 @@ brew install cmake
 brew install fswatch
 
 brew cask install opera
+brew cask install firefox
 brew cask install vlc
 brew cask install macvim
 brew cask install steam
+# brew cask install android-file-transfer
 
 git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
 python3 ~/home/.vim/bundle/YouCompleteMe/install.py --all
