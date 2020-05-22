@@ -33,6 +33,7 @@ setopt EXTENDED_GLOB
 setopt interactivecomments
 
 export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/.tech/bash"
 export PATH="$PATH:$HOME/.bin"
 
