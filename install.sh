@@ -42,6 +42,8 @@ brew install imagemagick
 brew install coreutils
 brew install cmake
 brew install fswatch
+brew install virtualenv
+brew install direnv
 
 brew cask install opera
 brew cask install firefox

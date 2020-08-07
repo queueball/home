@@ -53,3 +53,6 @@ alias transr='transmission-remote -t all -r'
 alias transa='transmission-remote -a'
 alias transl='transmission-remote -l'
 alias reload='source ~/.zshrc'
+
+# direnv
+eval "$(direnv hook zsh)"  # remember to run 'direnv allow' per directory it is used
