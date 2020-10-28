@@ -50,13 +50,9 @@ brew cask install firefox
 brew cask install vlc
 brew cask install macvim
 brew cask install steam
+brew cask install docker
 # brew cask install android-file-transfer
 
 git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
 python3 ~/home/.vim/bundle/YouCompleteMe/install.py --all
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# pip3 install requests
-# pip3 install tabulate
-# pip3 install pyautogui
-# pip3 install click

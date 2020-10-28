@@ -1,34 +1,39 @@
 [core]
-    autocrlf = false
-    editor = vim
-    excludesfile = ~/.gitignore
-    filemode = false
-    fscache = true
-    repositoryformatversion = 0
-    whitespace = cr-at-eol
+  autocrlf = false
+  editor = vim
+  excludesfile = ~/.gitignore
+  filemode = false
+  fscache = true
+  repositoryformatversion = 0
+  whitespace = cr-at-eol
 [alias]
-    a = commit --amend --no-edit
-    co = checkout
-    d = diff --full-index
-    lg = log --graph --pretty=format:'%Cred%h%Creset - %C(cyan)<%an>%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit --color
-    re = rebase
-    rr = rebase -i @{u}
-    stat = status -s -u --branch
-    s = status -s -u --branch
-    sho = show --color --full-index --ignore-space-change
-    stat = status -s -u --branch
+  a = commit --amend --no-edit
+  co = checkout
+  d = diff --full-index
+  lg = log --graph --pretty=format:'%Cred%h%Creset - %C(cyan)<%an>%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit --color
+  re = rebase
+  rc = rebase --committer-date-is-author-date -i
+  rr = rebase --committer-date-is-author-date -i @{u}
+  stat = status -s -u --branch
+  s = status -s -u --branch
+  sho = show --color --full-index --ignore-space-change
+  stat = status -s -u --branch
 [push]
-    default = current
+  default = current
 [rerere]
-    enabled = true
+  enabled = true
 [pull]
-    rebase = true
+  rebase = true
 [fetch]
-    prune = true
+  prune = true
 [diff]
-    renameLimit = 999999
+  renameLimit = 999999
 [merge]
-    renameLimit = 999999
+  renameLimit = 999999
 [user]
-    email = queueball314159@gmail.com
-    name = queueball
+  email = queueball314159@gmail.com
+  name = queueball
+[pager]
+  diff = false
+  show = false
+  log = false

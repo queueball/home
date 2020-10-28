@@ -3,8 +3,6 @@ execute pathogen#infect()
 filetype off
 filetype plugin indent on
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-
 colorscheme torte
 syntax enable                   " Keep my color settings
 
