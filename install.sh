@@ -44,6 +44,7 @@ brew install cmake
 brew install fswatch
 brew install virtualenv
 brew install direnv
+brew install rename
 
 brew cask install opera
 brew cask install firefox
