@@ -31,6 +31,7 @@ setopt PROMPTPERCENT
 setopt NUMERIC_GLOB_SORT
 setopt EXTENDED_GLOB
 setopt interactivecomments
+setopt histignorespace
 
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
