@@ -38,7 +38,7 @@ brew install transmission-cli &&  brew services start transmission-cli
 brew install syncthing && brew services start syncthing
 brew install watch
 brew install ffmpeg
-brew install imagemagick
+# brew install imagemagick
 brew install coreutils
 brew install cmake
 brew install fswatch
