@@ -45,6 +45,7 @@ brew install fswatch
 brew install virtualenv
 brew install direnv
 brew install rename
+brew install exiftool
 
 brew cask install opera
 brew cask install firefox
