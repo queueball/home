@@ -47,13 +47,13 @@ brew install direnv
 brew install rename
 brew install exiftool
 
-brew cask install opera
-brew cask install firefox
-brew cask install vlc
-brew cask install macvim
-brew cask install steam
-brew cask install docker
-# brew cask install android-file-transfer
+brew install --cask opera
+brew install --cask firefox
+brew install --cask vlc
+brew install --cask macvim
+brew install --cask steam
+brew install --cask docker
+# brew install --cask android-file-transfer
 
 git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
 python3 ~/home/.vim/bundle/YouCompleteMe/install.py --all
