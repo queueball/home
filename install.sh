@@ -53,6 +53,7 @@ brew install --cask vlc
 brew install --cask macvim
 brew install --cask steam
 brew install --cask docker
+brew install --cask iina
 # brew install --cask android-file-transfer
 
 git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
