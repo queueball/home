@@ -37,3 +37,5 @@
   diff = false
   show = false
   log = false
+[init]
+	defaultBranch = master
