@@ -63,3 +63,7 @@ autocmd Filetype python setlocal ts=4 sts=4 sw=4
 " autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " autocmd Filetype scss setlocal ts=2 sts=2 sw=2
 " autocmd Filetype *.hbs setlocal ts=2 sts=2 sw=2
+
+let mapleader = ','
+nmap <leader>d <plug>(YCMHover)
+let g:ycm_auto_hover = ''
