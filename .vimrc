@@ -67,3 +67,4 @@ autocmd Filetype python setlocal ts=4 sts=4 sw=4
 let mapleader = ','
 nmap <leader>d <plug>(YCMHover)
 let g:ycm_auto_hover = ''
+nmap <leader>r :YcmCompleter RefactorRename<Space>
