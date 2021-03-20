@@ -60,6 +60,7 @@ set fo-=t
 set foldcolumn=1
 
 autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd BufWritePost *.py call Flake8()
 " autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " autocmd Filetype scss setlocal ts=2 sts=2 sw=2
 " autocmd Filetype *.hbs setlocal ts=2 sts=2 sw=2
