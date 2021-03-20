@@ -28,35 +28,36 @@ echo "Symlink zsh files"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -s ~/home/.zshrc ~/.zshrc
 
-echo "Installing brew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "Installing brew"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install cask
-brew install vim
-brew link --overwrite vim
-brew install python3
-brew install transmission-cli &&  brew services start transmission-cli
-brew install syncthing && brew services start syncthing
-brew install watch
-brew install ffmpeg
-# brew install imagemagick
-brew install coreutils
-brew install cmake
-brew install fswatch
-brew install virtualenv
-brew install direnv
-brew install rename
-brew install exiftool
+  brew install cask
+  brew install vim && brew link --overwrite vim
+  brew install python3
+  brew install transmission-cli && brew services start transmission-cli
+  brew install syncthing && brew services start syncthing
+  brew install watch
+  brew install ffmpeg
+  # brew install imagemagick
+  brew install coreutils
+  brew install cmake
+  brew install fswatch
+  brew install virtualenv
+  brew install direnv
+  brew install rename
+  brew install exiftool
 
-brew install --cask opera
-brew install --cask firefox
-brew install --cask vlc
-brew install --cask macvim
-brew install --cask steam
-brew install --cask docker
-brew install --cask iina
-# brew install --cask android-file-transfer
+  # brew install --cask opera
+  brew install --cask firefox
+  # brew install --cask vlc
+  brew install --cask macvim
+  brew install --cask steam
+  brew install --cask docker
+  brew install --cask iina
+  # brew install --cask android-file-transfer
+fi
 
 git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
-python3 ~/home/.vim/bundle/YouCompleteMe/install.py --all
+python3 ~/home/.vim/bundle/YouCompleteMe/install.py
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
