@@ -10,7 +10,7 @@ git clone https://github.com/vim-airline/vim-airline-themes ~/home/.vim/bundle/v
 git clone https://github.com/nvie/vim-flake8 ~/home/.vim/bundle/vim-flake8
 git clone git://github.com/tpope/vim-vinegar.git ~/home/.vim/bundle/vim-vinegar
 git clone https://github.com/ycm-core/YouCompleteMe.git ~/home/.vim/bundle/YouCompleteMe
-
+git clone https://github.com/tpope/vim-fugitive.git ~/home/.vim/bundle/vim-fugitive
 
 echo "Cloning & installing useful fonts"
 git clone https://github.com/powerline/fonts.git ~/home/.vim/fonts/
