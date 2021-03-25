@@ -6,6 +6,10 @@ filetype plugin indent on
 colorscheme torte
 syntax enable                   " Keep my color settings
 
+augroup vimrc
+  autocmd!
+augroup END
+
 set mouse=a
 set nocompatible
 set nobackup
@@ -59,11 +63,32 @@ set fo-=t
 
 set foldcolumn=1
 
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
-autocmd BufWritePost *.py call Flake8()
+autocmd vimrc Filetype python setlocal ts=4 sts=4 sw=4 makeprg=flake8
+autocmd vimrc BufWritePost *.py silent make! <afile> | silent redraw!
+autocmd vimrc QuickFixCmdPost [^l]* cwindow
 " autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " autocmd Filetype scss setlocal ts=2 sts=2 sw=2
 " autocmd Filetype *.hbs setlocal ts=2 sts=2 sw=2
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set grepprg=ag\ --vimgrep
+
+function! Grep(...)
+	return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
+cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
+
+augroup quickfix
+	autocmd!
+	autocmd QuickFixCmdPost cgetexpr cwindow
+	autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader = ','
 nmap <leader>d <plug>(YCMHover)
