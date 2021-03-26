@@ -7,20 +7,18 @@ fi
 SAVEHIST=10000
 
 export ZSH="/Users/queueball/.oh-my-zsh"
-# ZSH_THEME="gnzh"
 ZSH_THEME="agnoster"
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 plugins=(
-  git
   docker
-  encode64
-  python
   sudo
-  # vi-mode
+  timer
   zsh-autosuggestions  # extra
 )
 
 source $ZSH/oh-my-zsh.sh
+
 
 autoload zmv
 
@@ -47,8 +45,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
-alias mygdf='gdf -H --output=source,avail /dev/disk1s1'
-alias ll='ls -alh'
 alias trans='transmission-remote'
 alias transr='transmission-remote -t all -r'
 alias transa='transmission-remote -a'
