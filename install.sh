@@ -1,63 +1,151 @@
 #!/bin/sh
-echo "Creating pathogen directories"
-mkdir -p ~/home/.vim/autoload ~/home/.vim/bundle && curl -LSso ~/home/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-echo "Cloning useful plugins"
-git clone git://github.com/tpope/vim-repeat.git ~/home/.vim/bundle/vim-repeat
-git clone git://github.com/tpope/vim-surround.git ~/home/.vim/bundle/vim-surround
-git clone https://github.com/vim-airline/vim-airline ~/home/.vim/bundle/vim-airline
-git clone https://github.com/vim-airline/vim-airline-themes ~/home/.vim/bundle/vim-airline-themes
-git clone git://github.com/tpope/vim-vinegar.git ~/home/.vim/bundle/vim-vinegar
-git clone https://github.com/ycm-core/YouCompleteMe.git ~/home/.vim/bundle/YouCompleteMe
-git clone https://github.com/tpope/vim-fugitive.git ~/home/.vim/bundle/vim-fugitive
-
-echo "Cloning & installing useful fonts"
-git clone https://github.com/powerline/fonts.git ~/home/.vim/fonts/
-~/home/.vim/fonts/install.sh
-echo "set guifont=Meslo\ LG\ L\ for\ Powerline:h11" >> ~/.gvimrc
-
-echo "Symlink vim files"
-ln -s ~/home/.vim ~/.vim
-ln -s ~/home/.vimrc ~/.vimrc
-
-echo "Symlink gitconfig"
-# ln -s ~/home/.gitconfig ~/.gitconfig
-
-echo "Symlink zsh files"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-ln -s ~/home/.zshrc ~/.zshrc
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  echo "Installing brew"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-  brew install cask
-  brew install vim && brew link --overwrite vim
-  brew install the_silver_searcher
-  brew install python3
-  brew install transmission-cli && brew services start transmission-cli
-  brew install syncthing && brew services start syncthing
-  brew install watch
-  brew install ffmpeg
-  # brew install imagemagick
-  brew install coreutils
-  brew install cmake
-  brew install fswatch
-  brew install virtualenv
-  brew install direnv
-  brew install rename
-  brew install exiftool
-
-  # brew install --cask opera
-  brew install --cask firefox
-  # brew install --cask vlc
-  brew install --cask macvim
-  brew install --cask steam
-  brew install --cask docker
-  brew install --cask iina
-  # brew install --cask android-file-transfer
+echo "=== vim customizations ==="
+if [ ! -d ~/home/.vim/autoload ]; then
+  echo "Creating pathogen directories"
+  mkdir -p ~/home/.vim/autoload ~/home/.vim/bundle && curl -LSso ~/home/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+else
+  echo "\talready installed" "Pathogen"
 fi
 
-git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
-python3 ~/home/.vim/bundle/YouCompleteMe/install.py
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+declare -a vim_plugins_src=(
+  git://github.com/tpope/vim-repeat.git
+  git://github.com/tpope/vim-surround.git
+  https://github.com/vim-airline/vim-airline
+  https://github.com/vim-airline/vim-airline-themes
+  git://github.com/tpope/vim-vinegar.git
+  https://github.com/ycm-core/YouCompleteMe.git
+  https://github.com/tpope/vim-fugitive.git
+)
+declare -a vim_plugins_dst=(
+  ~/home/.vim/bundle/vim-repeat
+  ~/home/.vim/bundle/vim-surround
+  ~/home/.vim/bundle/vim-airline
+  ~/home/.vim/bundle/vim-airline-themes
+  ~/home/.vim/bundle/vim-vinegar
+  ~/home/.vim/bundle/YouCompleteMe
+  ~/home/.vim/bundle/vim-fugitive
+)
+for (( i = 0; i < ${#vim_plugins_src[@]}; i ++ )); do
+  if [ ! -d ${vim_plugins_dst[$i]} ]; then
+    git clone ${vim_plugins_src[$i]} ${vim_plugins_dst[$i]}
+
+    if [ -d ~/home/.vim/bundle/YouCompleteMe ]; then
+      git -C ~/home/.vim/bundle/YouCompleteMe submodule update --init --recursive
+      python3 ~/home/.vim/bundle/YouCompleteMe/install.py
+    fi
+  else
+    echo "\talready installed" ${vim_plugins_dst[$i]}
+  fi
+done
+
+if [ ! -d ~/home/.vim/fonts/ ]; then
+  echo "Cloning & installing useful fonts"
+  git clone https://github.com/powerline/fonts.git ~/home/.vim/fonts/
+  ~/home/.vim/fonts/install.sh
+  echo "set guifont=Meslo\ LG\ L\ for\ Powerline:h11" >> ~/.gvimrc
+else
+  echo "\talready installed fonts"
+fi
+
+if [ ! -L ~/.vim ]; then
+  echo "Symlink vim files"
+  ln -s ~/home/.vim ~/.vim
+else
+  echo "\talready symlinked vim"
+fi
+if [ ! -L ~/.vimrc ]; then
+  echo "Symlink vimrc files"
+  ln -s ~/home/.vimrc ~/.vimrc
+else
+  echo "\talready symlinked vimrc"
+fi
+
+echo "=== git customizations ==="
+if [ ! -L ~/.gitconfig ]; then
+  echo "Symlink gitconfig"
+  # ln -s ~/home/.gitconfig ~/.gitconfig
+else
+  echo "\talready symlinked .gitconfig"
+fi
+
+if [ -n $ZSH_VERSION ]; then
+  echo "=== ZSH customizations ==="
+  if [ ! -L ~/.zshrc ]; then
+    echo "Symlink zsh files"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ln -s ~/home/.zshrc ~/.zshrc
+  else
+    echo "\talready symlinked .zshrc"
+  fi
+
+  if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  else
+    echo "\talready installed" "zsh-autosuggestions"
+  fi
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "=== MacOS customizations ==="
+  if ! command -v brew &> /dev/null; then
+    echo "Installing brew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    echo "\talready installed brew"
+  fi
+
+  echo "=== Brew customizations ==="
+  declare -a brew_libs=(
+    cask
+    vim
+    the_silver_searcher
+    python3
+    transmission-cli
+    syncthing 
+    watch
+    ffmpeg
+    # imagemagick
+    coreutils
+    cmake
+    fswatch
+    # virtualenv
+    direnv
+    rename
+    exiftool
+  )
+  for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
+    if ! brew ls --versions ${brew_libs[$i]} > /dev/null; then
+      brew install ${brew_libs[$i]}
+      if [ ${brew_libs[$i]} = "vim" ]; then
+        brew link --overwrite vim
+      fi
+      if [ ${brew_libs[$i]} = "transmission-cli" ]; then
+        brew services start transmission-cli
+      fi
+      if [ ${brew_libs[$i]} = "syncthing" ]; then
+        brew services start syncthing
+      fi
+    else
+      echo "\talready installed" ${brew_libs[$i]}
+    fi
+  done
+
+  echo "=== Cask customizations ==="
+  declare -a cask_libs=(
+    # opera
+    firefox
+    # vlc
+    macvim
+    steam
+    docker
+    iina
+    # android-file-transfer
+  )
+  for (( i = 0; i < ${#cask_libs[@]}; i ++ )); do
+    if ! brew ls --cask --versions ${cask_libs[$i]} > /dev/null; then
+      brew install --cask ${cask_libs[$i]}
+    else
+      echo "\talready installed" ${cask_libs[$i]}
+    fi
+  done
+fi
