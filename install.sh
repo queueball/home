@@ -101,7 +101,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     the_silver_searcher
     python3
     transmission-cli
-    syncthing 
+    syncthing
     watch
     ffmpeg
     # imagemagick
