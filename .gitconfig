@@ -11,10 +11,9 @@
   co = checkout
   d = diff --full-index
   lg = log --graph --pretty=format:'%Cred%h%Creset - %C(cyan)<%an>%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit --color
-  re = rebase
   rc = rebase --committer-date-is-author-date -i
+  re = rebase
   rr = rebase --committer-date-is-author-date -i @{u}
-  stat = status -s -u --branch
   s = status -s -u --branch
   sho = show --color --full-index --ignore-space-change
   stat = status -s -u --branch
@@ -30,12 +29,13 @@
   renameLimit = 999999
 [merge]
   renameLimit = 999999
-[user]
-  email = queueball314159@gmail.com
-  name = queueball
 [pager]
   diff = false
   show = false
   log = false
 [init]
 	defaultBranch = master
+[includeIf "gitdir:~/.tech/"]
+  path = ~/home/.gitconfig-home
+[includeIf "gitdir:~/home/"]
+  path = ~/home/.gitconfig-home
