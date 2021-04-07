@@ -1,8 +1,8 @@
 HISTSIZE=10000
 if (( ! EUID )); then
-	HISTFILE=~/.history_root
+  HISTFILE=~/.history_root
 else
-	HISTFILE=~/.history
+  HISTFILE=~/.history
 fi
 SAVEHIST=10000
 
