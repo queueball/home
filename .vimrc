@@ -42,6 +42,7 @@ set noswapfile                  " turn off the swap file (the example.txt~ file)
 
 set nowrap                      " turn off line wrapping
 set formatoptions-=t            " default is tcq, removing t - http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
+set formatoptions+=j            " default is tcq, adding j - http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
 set textwidth=160               " maximum width of a line upon insertion
 set linebreak                   " when auto inserting linebreaks, don't split words
 set expandtab                   " convert any tabs entered into spaces
