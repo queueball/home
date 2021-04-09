@@ -8,11 +8,11 @@ else
 fi
 
 declare -a vim_plugins_src=(
-  git://github.com/tpope/vim-repeat.git
-  git://github.com/tpope/vim-surround.git
+  https://github.com/tpope/vim-repeat.git
+  https://github.com/tpope/vim-surround.git
   https://github.com/vim-airline/vim-airline
   https://github.com/vim-airline/vim-airline-themes
-  git://github.com/tpope/vim-vinegar.git
+  https://github.com/tpope/vim-vinegar.git
   https://github.com/ycm-core/YouCompleteMe.git
   https://github.com/tpope/vim-fugitive.git
 )
