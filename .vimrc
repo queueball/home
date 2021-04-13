@@ -15,7 +15,6 @@ syntax enable                   " syntax coloring
 
 let mapleader = ','
 
-" set nocompatible                " Not needed since this file exists
 set mouse=a                     " Enable the use of mouse in all modes, need for terminal version
 set mousefocus                  " move focus with mouse
 set ttyfast                     " hints at a fast terminal connection
@@ -27,7 +26,7 @@ set scrolloff=3                 " when scrolling up and down, try to keep at lea
 set ruler                       " turns on cursor coordinates in the file
 set number                      " turns on the line numbers
 set relativenumber              " turns on relative line numbers
-" set laststatus=2                " window always shows the status line, redundant with airline
+set viminfo='100,f1             " save marks between reloading vim
 
 set autoread                    " reload the file under certain conditions of the file changing, like buffer updates and external commands
 set autowrite                   " save the file when switching to another file
@@ -66,3 +65,9 @@ autocmd vimrc QuickFixCmdPost [^l]* cwindow
 
 " copy entire file to macos clipboard
 nmap <leader>c :silent execute 'w !pbcopy'<CR>
+
+" useful shortcuts for navigating windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
