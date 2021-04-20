@@ -15,6 +15,7 @@ declare -a vim_plugins_src=(
   https://github.com/tpope/vim-vinegar.git
   https://github.com/ycm-core/YouCompleteMe.git
   https://github.com/tpope/vim-fugitive.git
+  https://github.com/godlygeek/tabular.git
 )
 declare -a vim_plugins_dst=(
   ~/home/.vim/bundle/vim-repeat
@@ -24,6 +25,7 @@ declare -a vim_plugins_dst=(
   ~/home/.vim/bundle/vim-vinegar
   ~/home/.vim/bundle/YouCompleteMe
   ~/home/.vim/bundle/vim-fugitive
+  ~/home/.vim/bundle/tabular
 )
 for (( i = 0; i < ${#vim_plugins_src[@]}; i ++ )); do
   if [ ! -d ${vim_plugins_dst[$i]} ]; then
@@ -110,7 +112,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fswatch
     # virtualenv
     direnv
-    rename
+    # rename
     exiftool
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
