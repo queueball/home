@@ -8,6 +8,8 @@ let g:ycm_auto_hover = ''
 nmap <leader>d <plug>(YCMHover)
 nmap <leader>r :YcmCompleter RefactorRename<Space>
 
+let g:netrw_fastbrowse = 0      " fix for vim-vinegar that causes the netrw buffer to remain open
+
 filetype plugin indent on       " turns on filetype detection, load <filetype>plugin.vim, <filetype>indent.vim
 
 colorscheme torte
