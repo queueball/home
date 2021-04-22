@@ -1,4 +1,6 @@
 #!/bin/sh
+trap "exit" INT
+
 echo "=== vim customizations ==="
 if [ ! -d ~/home/.vim/autoload ]; then
   echo "Creating pathogen directories"
@@ -61,6 +63,9 @@ if [ ! -L ~/.vimrc ]; then
 else
   echo "\talready symlinked vimrc"
 fi
+
+echo "=== vim compute helptags ==="
+vim -c helptags -c 'qa!'
 
 echo "=== git customizations ==="
 if [ ! -L ~/.gitconfig ]; then
