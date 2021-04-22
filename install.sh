@@ -65,7 +65,7 @@ else
 fi
 
 echo "=== vim compute helptags ==="
-vim -c helptags -c 'qa!'
+vim -c Helptags -c 'qa!'
 
 echo "=== git customizations ==="
 if [ ! -L ~/.gitconfig ]; then
