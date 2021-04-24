@@ -1,10 +1,13 @@
 execute pathogen#infect()
 
+let mapleader = ','
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 let g:ycm_auto_hover = ''
+
 nmap <leader>d <plug>(YCMHover)
 nmap <leader>r :YcmCompleter RefactorRename<Space>
 
@@ -14,8 +17,6 @@ filetype plugin indent on       " turns on filetype detection, load <filetype>pl
 
 colorscheme torte
 syntax enable                   " syntax coloring
-
-let mapleader = ','
 
 set mouse=a                     " Enable the use of mouse in all modes, need for terminal version
 set mousefocus                  " move focus with mouse
