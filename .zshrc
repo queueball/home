@@ -30,6 +30,7 @@ setopt EXTENDED_GLOB                  # additional globbing support for * patter
 setopt interactivecomments            # allow comments in the interactive shell
 setopt histignorespace                # do not store a command if prepended with space
 
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/usr/local/bin:$PATH"    # fixes for homebrew
 export PATH="/usr/local/sbin:$PATH"   # fixes for homebrew
 export PATH="$PATH:$HOME/.tech/bash"  # put my custom bash scripts in the path
