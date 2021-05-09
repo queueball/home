@@ -37,6 +37,7 @@ export PATH="$PATH:$HOME/.tech/bash"  # put my custom bash scripts in the path
 export PATH="$PATH:$HOME/.bin"        # put my custom bin folder in the path
 export EDITOR="/usr/local/bin/vim"    # I like vim...
 export VISUAL="/usr/local/bin/vim"    # I like vim...
+export FIND_PARAMS=(-not -path '*/\.git*' -not -path '*/__pycache__*' -not -path '*/\.pytest_cache*')
 
 zstyle ':completion:*' menu select    # shows menu and highlights completion options
 
