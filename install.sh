@@ -48,7 +48,7 @@ if [ ! -d ~/home/.vim/fonts/ ]; then
   git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/home/.vim/fonts/
   ~/home/.vim/fonts/install.sh Meslo
   # For graphical versions of VIM
-  echo "set guifont=MesloLGS\ Nerd\ Font\ Mono:h11" >> ~/.gvimrc
+  echo "set guifont=MesloLGS\ Nerd\ Font\ Mono:h12" >> ~/.gvimrc
 else
   echo "\talready installed fonts"
 fi
