@@ -27,6 +27,7 @@
   prune = true
 [diff]
   renameLimit = 999999
+  ignoreSubmodules = dirty
 [merge]
   renameLimit = 999999
 [pager]
