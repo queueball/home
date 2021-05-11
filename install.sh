@@ -44,9 +44,11 @@ done
 
 if [ ! -d ~/home/.vim/fonts/ ]; then
   echo "Cloning & installing useful fonts"
-  git clone https://github.com/powerline/fonts.git ~/home/.vim/fonts/
-  ~/home/.vim/fonts/install.sh
-  echo "set guifont=Meslo\ LG\ L\ for\ Powerline:h11" >> ~/.gvimrc
+  # NOTE this is pretty large
+  git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/home/.vim/fonts/
+  ~/home/.vim/fonts/install.sh Meslo
+  # For graphical versions of VIM
+  echo "set guifont=MesloLGS\ Nerd\ Font\ Mono:h11" >> ~/.gvimrc
 else
   echo "\talready installed fonts"
 fi
