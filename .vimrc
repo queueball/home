@@ -25,11 +25,13 @@ set lazyredraw                  " helps with rendering when running macros
 set wildmenu                    " command completion
 set wildmode=longest:full,full  " command completion settings
 set showcmd                     " show the command you're typing in the bottom right corner
+set showmatch                   " show matching bracket
 set scrolloff=3                 " when scrolling up and down, try to keep at least 3 lines between the cursor and the edge of the screen
 set ruler                       " turns on cursor coordinates in the file
 set number                      " turns on the line numbers
 set relativenumber              " turns on relative line numbers
 set viminfo='100,f1             " save marks between reloading vim
+set cursorline                  " highlight line with cursor
 
 set autoread                    " reload the file under certain conditions of the file changing, like buffer updates and external commands
 set autowrite                   " save the file when switching to another file
@@ -55,7 +57,12 @@ set shiftwidth=2                " how many spaces when using << or >>
 set shiftround                  " causes shifts to align to a multiple of the shift width
 set backspace=indent,eol,start  " Backspace behavior
 
+set foldenable                  " turn on folding
 set foldcolumn=1                " column width to indicate folds
+set foldlevelstart=10           " by default open most folds
+set foldmethod=indent
+" shortcut for toggling folds
+nnoremap <space> za
 
 augroup vimrc
   autocmd!
