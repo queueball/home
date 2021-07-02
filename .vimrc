@@ -83,3 +83,4 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 nmap <leader>b :bn<cr>:bd#<cr>
+nmap <leader>l :Black<cr>

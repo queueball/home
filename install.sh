@@ -18,6 +18,7 @@ declare -a vim_plugins_src=(
   https://github.com/ycm-core/YouCompleteMe.git
   https://github.com/tpope/vim-fugitive.git
   https://github.com/godlygeek/tabular.git
+  https://github.com/psf/black.git
 )
 declare -a vim_plugins_dst=(
   ~/home/.vim/bundle/vim-repeat
@@ -28,6 +29,7 @@ declare -a vim_plugins_dst=(
   ~/home/.vim/bundle/YouCompleteMe
   ~/home/.vim/bundle/vim-fugitive
   ~/home/.vim/bundle/tabular
+  ~/home/.vim/bundle/black
 )
 for (( i = 0; i < ${#vim_plugins_src[@]}; i ++ )); do
   if [ ! -d ${vim_plugins_dst[$i]} ]; then
