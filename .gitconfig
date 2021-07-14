@@ -10,6 +10,7 @@
   a = commit --amend --no-edit
   co = checkout
   d = diff --full-index
+  dw = diff --full-index --word-diff=color --word-diff-regex=.
   lg = log --graph --pretty=format:'%Cred%h%Creset - %C(cyan)<%an>%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit --color -n 10
   rc = rebase --committer-date-is-author-date -i
   re = rebase
