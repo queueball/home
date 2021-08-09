@@ -36,7 +36,7 @@
   show = false
   log = false
 [init]
-  defaultBranch = master
+	defaultBranch = main
 [includeIf "gitdir:~/.tech/"]
   path = ~/home/.gitconfig-home
 [includeIf "gitdir:~/home/"]
