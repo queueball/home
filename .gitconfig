@@ -27,14 +27,14 @@
 [fetch]
   prune = true
 [diff]
-  renameLimit = 999999
   ignoreSubmodules = dirty
+  renameLimit = 999999
 [merge]
   renameLimit = 999999
 [pager]
   diff = false
-  show = false
   log = false
+  show = false
 [init]
 	defaultBranch = main
 [includeIf "gitdir:~/.tech/"]
@@ -42,5 +42,5 @@
 [includeIf "gitdir:~/home/"]
   path = ~/home/.gitconfig-home
 [color]
-  status = always
   diff = always
+  status = always
