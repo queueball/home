@@ -124,6 +124,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # rename
     exiftool
     gnu-sed
+    yt-dlp
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
     if ! brew ls --versions ${brew_libs[$i]} > /dev/null; then
