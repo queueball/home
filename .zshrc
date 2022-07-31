@@ -55,5 +55,6 @@ if [[ -a $(which transmission-remote) ]]; then
   alias tral='transmission-remote -l'
 fi
 alias reload='source ~/.zshrc'        # makes testing zshrc changes easier
+alias qf='find . -iname'
 
 eval "$(direnv hook zsh)"             # remember to run 'direnv allow' per directory it is used
