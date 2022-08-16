@@ -120,10 +120,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     cmake
     fswatch
     # virtualenv
-    direnv
+    # direnv
     # rename
     exiftool
-    gnu-sed
+    # gnu-sed
     yt-dlp
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
@@ -153,6 +153,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     docker
     iina
     # android-file-transfer
+    roku-remote-tool
   )
   for (( i = 0; i < ${#cask_libs[@]}; i ++ )); do
     if ! brew ls --cask --versions ${cask_libs[$i]} > /dev/null; then
