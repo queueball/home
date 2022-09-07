@@ -40,6 +40,7 @@ export VISUAL="/usr/local/bin/vim"    # I like vim...
 export FIND_PARAMS=(-not -path '*/\.git*' -not -path '*/__pycache__*' -not -path '*/\.pytest_cache*')
 export PYTHONDONTWRITEBYTECODE="IGNORE"
 export _PIP_LOCATIONS_NO_WARN_ON_MISMATCH=1
+export DOCKER_SCAN_SUGGEST=false
 
 zstyle ':completion:*' menu select    # shows menu and highlights completion options
 
