@@ -118,7 +118,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # imagemagick
     coreutils
     cmake
-    fswatch
     # virtualenv
     # direnv
     # rename
