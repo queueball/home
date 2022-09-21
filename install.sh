@@ -107,22 +107,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   echo "=== Brew customizations ==="
   declare -a brew_libs=(
+    # brew leaves -r
     cask
-    vim
-    the_silver_searcher
-    python3
-    transmission-cli
-    syncthing
-    watch
-    ffmpeg
-    # imagemagick
-    coreutils
     cmake
-    # virtualenv
-    # direnv
-    # rename
     exiftool
-    # gnu-sed
+    ffmpeg
+    gaze
+    git
+    python3
+    syncthing
+    the_silver_searcher
+    transmission-cli
+    vim
+    watch
+    wget
     yt-dlp
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
@@ -144,15 +142,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   echo "=== Cask customizations ==="
   declare -a cask_libs=(
-    # opera
-    firefox
-    # vlc
-    macvim
-    steam
+    android-file-transfer
     docker
+    firefox
     iina
-    # android-file-transfer
+    macvim
+    raspberry-pi-imager
     roku-remote-tool
+    signal
+    steam
+    turbo-boost-switcher
   )
   for (( i = 0; i < ${#cask_libs[@]}; i ++ )); do
     if ! brew ls --cask --versions ${cask_libs[$i]} > /dev/null; then
