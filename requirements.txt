@@ -1,0 +1,10 @@
+pip
+requests
+tabulate
+feedparser
+click
+pytest
+pytest-watch
+pytest-cov
+lz4
+psutil
