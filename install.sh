@@ -16,7 +16,6 @@ declare -a vim_plugins_src=(
   https://github.com/vim-airline/vim-airline-themes
   https://github.com/tpope/vim-vinegar.git
   https://github.com/ycm-core/YouCompleteMe.git
-  https://github.com/tpope/vim-fugitive.git
   https://github.com/godlygeek/tabular.git
   https://github.com/psf/black.git
 )
@@ -27,7 +26,6 @@ declare -a vim_plugins_dst=(
   ~/home/.vim/bundle/vim-airline-themes
   ~/home/.vim/bundle/vim-vinegar
   ~/home/.vim/bundle/YouCompleteMe
-  ~/home/.vim/bundle/vim-fugitive
   ~/home/.vim/bundle/tabular
   ~/home/.vim/bundle/black
 )
