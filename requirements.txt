@@ -8,3 +8,5 @@ pytest-watch
 pytest-cov
 lz4
 psutil
+
+python-lsp-server

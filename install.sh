@@ -69,6 +69,21 @@ fi
 echo "=== vim compute helptags ==="
 vim -c Helptags -c 'qa!'
 
+echo "=== nvim customizations ==="
+if [ ! -L ~/.config/nvim/init.lua ]; then
+  echo "Symlink nvim init.lua"
+  ln -s -f ~/home/init.lua ~/.config/nvim/init.lua
+else
+  echo "\talready symlinked vimrc"
+fi
+
+if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+  echo "\t Cloning packer"
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+else
+  echo "\talready downloaded packer"
+fi
+
 echo "=== git customizations ==="
 if [ ! -L ~/.gitconfig ]; then
   echo "Symlink gitconfig"
@@ -112,6 +127,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     ffmpeg
     gaze
     git
+    neovim
     python3
     syncthing
     the_silver_searcher
