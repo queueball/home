@@ -35,8 +35,8 @@ export PATH="/usr/local/bin:$PATH"    # fixes for homebrew
 export PATH="/usr/local/sbin:$PATH"   # fixes for homebrew
 export PATH="$PATH:$HOME/.tech/bash"  # put my custom bash scripts in the path
 export PATH="$PATH:$HOME/.bin"        # put my custom bin folder in the path
-export EDITOR="/usr/local/bin/vim"    # I like vim...
-export VISUAL="/usr/local/bin/vim"    # I like vim...
+export EDITOR="/usr/local/bin/nvim"   # I like nvim...
+export VISUAL="/usr/local/bin/nvim"   # I like nvim...
 export PYTHONDONTWRITEBYTECODE="IGNORE"
 export _PIP_LOCATIONS_NO_WARN_ON_MISMATCH=1
 export DOCKER_SCAN_SUGGEST=false
@@ -56,3 +56,4 @@ if [[ -a $(which transmission-remote) ]]; then
 fi
 alias reload='source ~/.zshrc'        # makes testing zshrc changes easier
 alias qf='find . -iname'
+alias vim='nvim'

@@ -28,7 +28,7 @@ set mousefocus                  " move focus with mouse
 " set ttyfast                     " hints at a fast terminal connection
 set lazyredraw                  " helps with rendering when running macros
 " set wildmenu                    " command completion
-set wildmode=longest:full,full  " command completion settings
+" set wildmode=longest:full,full  " command completion settings
 " set showcmd                     " show the command you're typing in the bottom right corner
 set showmatch                   " show matching bracket
 set scrolloff=3                 " when scrolling up and down, try to keep at least 3 lines between the cursor and the edge of the screen
@@ -70,14 +70,14 @@ set foldmethod=indent
 " shortcut for toggling folds
 nnoremap <space> za
 
-augroup vimrc
-  autocmd!
-augroup END
+" augroup vimrc
+"  autocmd!
+" augroup END
 
 " Override tabs spacing settings for python files and run flake8 on save
-autocmd vimrc Filetype python setlocal ts=4 sts=4 sw=4 makeprg=flake8
-autocmd vimrc BufWritePost *.py silent make! <afile> | silent redraw!
-autocmd vimrc QuickFixCmdPost [^l]* cwindow
+" autocmd vimrc Filetype python setlocal ts=4 sts=4 sw=4 makeprg=flake8
+" autocmd vimrc BufWritePost *.py silent make! <afile> | silent redraw!
+" autocmd vimrc QuickFixCmdPost [^l]* cwindow
 
 " useful shortcuts for navigating windows
 map <C-j> <C-W>j
@@ -88,6 +88,8 @@ map <C-l> <C-W>l
 unmap Y
 
 nmap <leader>b :bn<cr>:bd#<cr>
+
+set completeopt=menu,menuone,noselect
 ]])
 
 -- Mappings.
@@ -128,9 +130,83 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
+--require('lspconfig')['pylsp'].setup{
+--    on_attach = on_attach,
+--    flags = lsp_flags,
+--}
+
+-- Set up nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+-- -- Set up lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+--   capabilities = capabilities
+-- }
 require('lspconfig')['pylsp'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
+    capabilities = capabilities
 }
 
 return require('packer').startup(function(use)
@@ -143,6 +219,8 @@ return require('packer').startup(function(use)
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
   use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
