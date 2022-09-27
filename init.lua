@@ -1,3 +1,6 @@
+--------------------------------------------------------------------------------
+-- on initial setup, handle adding the package manager
+--------------------------------------------------------------------------------
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -11,87 +14,21 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+--------------------------------------------------------------------------------
+-- airline (status bar)
+--------------------------------------------------------------------------------
 vim.g['airline#extensions#tabline#enabled'] = 1
 vim.g['airline_powerline_fonts'] = 1
 vim.g['airline#extensions#tabline#fnamemod'] = ':t'
 
-vim.cmd([[
-let mapleader = ','
+--------------------------------------------------------------------------------
+-- direct port of .vimrc
+--------------------------------------------------------------------------------
+vim.cmd [[source ~/.config/nvim/vimscript/custom.vim ]]
 
-filetype plugin indent on       " turns on filetype detection, load <filetype>plugin.vim, <filetype>indent.vim
-
-" colorscheme koehler
-" syntax enable                   " syntax coloring
-
-set mouse=a                     " Enable the use of mouse in all modes, need for terminal version
-set mousefocus                  " move focus with mouse
-" set ttyfast                     " hints at a fast terminal connection
-set lazyredraw                  " helps with rendering when running macros
-" set wildmenu                    " command completion
-" set wildmode=longest:full,full  " command completion settings
-" set showcmd                     " show the command you're typing in the bottom right corner
-set showmatch                   " show matching bracket
-set scrolloff=3                 " when scrolling up and down, try to keep at least 3 lines between the cursor and the edge of the screen
-" set ruler                       " turns on cursor coordinates in the file
-set number                      " turns on the line numbers
-set relativenumber              " turns on relative line numbers
-set shada='100,f1             	" save marks between reloading vim
-set cursorline                  " highlight line with cursor
-set guicursor=                  " disable cursot management by neovim
-
-" set autoread                    " reload the file under certain conditions of the file changing, like buffer updates and external commands
-set autowrite                   " save the file when switching to another file
-set autochdir                   " sets the vim context to the dir of the current buffer
-
-" set incsearch                   " highlight the next word as you're searching for it
-" set hlsearch                    " highlight all matching search patterns
-
-set nobackup                    " disable temporary backup files
-set nowritebackup               " disable temporary backup files
-set noswapfile                  " turn off the swap file (the example.txt~ file)
-
-set nowrap                      " turn off line wrapping
-set formatoptions-=t            " default is tcq, removing t - http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
-" set formatoptions+=j            " default is tcq, adding j - http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
-set textwidth=160               " maximum width of a line upon insertion
-set linebreak                   " when auto inserting linebreaks, don't split words
-set expandtab                   " convert any tabs entered into spaces
-" set autoindent                  " causes new lines enter to keep the same indentation as the previous line
-set tabstop=2                   " how many spaces to insert in expandtab
-set softtabstop=2               " treats certain operations on softtabs as and go back multiple spaces
-set shiftwidth=2                " how many spaces when using << or >>
-set shiftround                  " causes shifts to align to a multiple of the shift width
-set backspace=indent,eol,start  " Backspace behavior
-
-set foldenable                  " turn on folding
-set foldcolumn=1                " column width to indicate folds
-set foldlevelstart=10           " by default open most folds
-set foldmethod=indent
-" shortcut for toggling folds
-nnoremap <space> za
-
-" augroup vimrc
-"  autocmd!
-" augroup END
-
-" Override tabs spacing settings for python files and run flake8 on save
-" autocmd vimrc Filetype python setlocal ts=4 sts=4 sw=4 makeprg=flake8
-" autocmd vimrc BufWritePost *.py silent make! <afile> | silent redraw!
-" autocmd vimrc QuickFixCmdPost [^l]* cwindow
-
-" useful shortcuts for navigating windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-unmap Y
-
-nmap <leader>b :bn<cr>:bd#<cr>
-
-set completeopt=menu,menuone,noselect
-]])
-
+--------------------------------------------------------------------------------
+-- nvim-lspconfig
+--------------------------------------------------------------------------------
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -130,12 +67,10 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
---require('lspconfig')['pylsp'].setup{
---    on_attach = on_attach,
---    flags = lsp_flags,
---}
 
+--------------------------------------------------------------------------------
 -- Set up nvim-cmp.
+--------------------------------------------------------------------------------
 local cmp = require'cmp'
 
 cmp.setup({
@@ -143,14 +78,7 @@ cmp.setup({
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
-  },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -161,19 +89,7 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-  }, {
-    { name = 'buffer' },
-  })
-})
-
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    { name = 'vsnip' },
   }, {
     { name = 'buffer' },
   })
@@ -197,30 +113,38 @@ cmp.setup.cmdline(':', {
   })
 })
 
--- -- Set up lspconfig.
+--------------------------------------------------------------------------------
+-- Start the lsp
+--------------------------------------------------------------------------------
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
---   capabilities = capabilities
--- }
 require('lspconfig')['pylsp'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
 }
 
+--------------------------------------------------------------------------------
+-- manage the plugins
+--------------------------------------------------------------------------------
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
+  -- PackerInstall (may require restarting nvim)
   use 'https://github.com/godlygeek/tabular.git'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-vinegar'
+
   use 'tpope/vim-repeat'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-vinegar' -- simpler navigation
+
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
+
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/nvim-cmp'  -- autocompletion, no func signatures
+  use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -73,6 +73,8 @@ echo "=== nvim customizations ==="
 if [ ! -L ~/.config/nvim/init.lua ]; then
   echo "Symlink nvim init.lua"
   ln -s -f ~/home/init.lua ~/.config/nvim/init.lua
+  mkdir -p ~/.config/nvim/vimscript
+  ln -s -f ~/home/custom.vim ~/.config/nvim/vimscript/custom.vim
 else
   echo "\talready symlinked vimrc"
 fi
