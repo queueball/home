@@ -29,23 +29,16 @@ vim.cmd [[source ~/.config/nvim/vimscript/custom.vim ]]
 --------------------------------------------------------------------------------
 -- nvim-lspconfig
 --------------------------------------------------------------------------------
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap=true, silent=true }  -- `:help vim.diagnostic.*`
 vim.keymap.set('n', ',e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', ',q', vim.diagnostic.setloclist, opts)
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }  -- `:help vim.lsp.*`
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -64,8 +57,7 @@ local on_attach = function(client, bufnr)
 end
 
 local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
+  debounce_text_changes = 150,  -- This is the default in Nvim 0.7+
 }
 
 --------------------------------------------------------------------------------
@@ -75,8 +67,7 @@ local cmp = require'cmp'
 
 cmp.setup({
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
+    expand = function(args) -- REQUIRED - you must specify a snippet engine
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
     end,
   },
@@ -95,7 +86,7 @@ cmp.setup({
   })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+-- Use buffer source for `/` (incompatible with `native_menu`).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -103,7 +94,7 @@ cmp.setup.cmdline('/', {
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- Use cmdline & path source for ':' (incompatible with `native_menu`).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -113,10 +104,11 @@ cmp.setup.cmdline(':', {
   })
 })
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 --------------------------------------------------------------------------------
 -- Start the lsp
 --------------------------------------------------------------------------------
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['pylsp'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
