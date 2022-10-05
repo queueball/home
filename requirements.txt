@@ -9,4 +9,6 @@ pytest-cov
 lz4
 psutil
 
-python-lsp-server
+python-lsp-server[all]
+flake8
+isort

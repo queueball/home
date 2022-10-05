@@ -30,10 +30,10 @@ vim.cmd [[source ~/.config/nvim/vimscript/custom.vim ]]
 -- nvim-lspconfig
 --------------------------------------------------------------------------------
 local opts = { noremap=true, silent=true }  -- `:help vim.diagnostic.*`
-vim.keymap.set('n', ',e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', ',q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
@@ -44,16 +44,16 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', ',wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', ',wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', ',wl', function()
+  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', ',D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', ',rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', ',ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', ',f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
 end
 
 local lsp_flags = {
@@ -113,6 +113,29 @@ require('lspconfig')['pylsp'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
+  settings = {
+    pylsp = {
+      configurationSources = {"flake8"},
+      plugins = {
+            jedi_completion = {enabled = true},
+            jedi_hover = {enabled = true},
+            jedi_references = {enabled = true},
+            jedi_signature_help = {enabled = true},
+            jedi_symbols = {enabled = true, all_scopes = true},
+            pycodestyle = {enabled = true},
+            flake8 = {enabled = true},
+            -- mypy = {enabled = true, live_mode=true, disallow_untyped_calls = false},
+            -- isort = {enabled = true},
+            -- yapf = {enabled = false},
+            -- pylint = {enabled = false},
+            -- pydocstyle = {enabled = false},
+            -- mccabe = {enabled = false},
+            -- preload = {enabled = false},
+            -- pyflakes = {enabled=false},
+            -- rope_completion = {enabled =false}
+      }
+    }
+  },
 }
 
 --------------------------------------------------------------------------------
