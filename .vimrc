@@ -1,6 +1,7 @@
 execute pathogen#infect()
 
-let mapleader = ','
+" prevents some delay when remapping <leader>
+map , <leader>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -8,16 +9,19 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 let g:ycm_auto_hover = ''
 
+let g:netrw_fastbrowse = 0      " fix for vim-vinegar that causes the netrw buffer to remain open
+
 nmap <leader>d <plug>(YCMHover)
 nmap <leader>r :YcmCompleter RefactorRename<Space>
-
-let g:netrw_fastbrowse = 0      " fix for vim-vinegar that causes the netrw buffer to remain open
 
 filetype plugin indent on       " turns on filetype detection, load <filetype>plugin.vim, <filetype>indent.vim
 
 colorscheme koehler
 syntax enable                   " syntax coloring
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SETTINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=a                     " Enable the use of mouse in all modes, need for terminal version
 set mousefocus                  " move focus with mouse
 set ttyfast                     " hints at a fast terminal connection
@@ -57,13 +61,9 @@ set shiftwidth=2                " how many spaces when using << or >>
 set shiftround                  " causes shifts to align to a multiple of the shift width
 set backspace=indent,eol,start  " Backspace behavior
 
-set foldenable                  " turn on folding
-set foldcolumn=1                " column width to indicate folds
-set foldlevelstart=10           " by default open most folds
-set foldmethod=indent
-" shortcut for toggling folds
-nnoremap <space> za
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOCMDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimrc
   autocmd!
 augroup END
@@ -73,9 +73,9 @@ autocmd vimrc Filetype python setlocal ts=4 sts=4 sw=4 makeprg=flake8
 autocmd vimrc BufWritePost *.py silent make! <afile> | silent redraw!
 autocmd vimrc QuickFixCmdPost [^l]* cwindow
 
-" copy entire file to macos clipboard
-nmap <leader>c :silent execute 'w !pbcopy'<CR>
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" REMAPPING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " useful shortcuts for navigating windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -84,3 +84,9 @@ map <C-l> <C-W>l
 
 nmap <leader>b :bn<cr>:bd#<cr>
 nmap <leader>l :Black<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FIXES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fix issue with markdown errors showing in nvm-cmp documentation
+hi link markdownError Normal
