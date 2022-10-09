@@ -177,3 +177,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
   done
 fi
+
+# vi: ft=zsh
