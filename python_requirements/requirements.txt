@@ -1,0 +1,30 @@
+# These are the global python libraries that are used routinely
+# The decision to have the associated scripts not be a virtual environment is based on not really needing to distribute them (see .zshrc putting specialized #
+# binaries in a user specific path), these might be changed (likely into containers) to clean up the globals
+pip
+
+# better versions of the built in functions
+requests
+click
+
+# prettify lists and lists of lists
+tabulate
+
+# for parsing camelcamelcamel
+feedparser
+
+# test all the things
+pytest
+pytest-cov
+pytest-watch
+
+# for handling firefox state parsing
+lz4
+psutil
+
+# nvim modules
+python-lsp-server[all]
+
+# code editing modules
+flake8
+isort

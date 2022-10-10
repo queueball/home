@@ -5,3 +5,4 @@ tmp.vim
 .vim/bundle
 .vim/black
 .fonts
+nvim/plugin/packer_compiled.lua
