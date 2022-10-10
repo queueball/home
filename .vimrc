@@ -7,12 +7,12 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-let g:ycm_auto_hover = ''
+" let g:ycm_auto_hover = ''
 
 let g:netrw_fastbrowse = 0      " fix for vim-vinegar that causes the netrw buffer to remain open
 
-nmap <leader>d <plug>(YCMHover)
-nmap <leader>r :YcmCompleter RefactorRename<Space>
+" nmap <leader>d <plug>(YCMHover)
+" nmap <leader>r :YcmCompleter RefactorRename<Space>
 
 filetype plugin indent on       " turns on filetype detection, load <filetype>plugin.vim, <filetype>indent.vim
 
@@ -83,7 +83,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 nmap <leader>b :bn<cr>:bd#<cr>
-nmap <leader>l :Black<cr>
+" nmap <leader>l :Black<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIXES
