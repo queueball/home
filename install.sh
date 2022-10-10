@@ -1,6 +1,10 @@
 #!/bin/sh
 trap "exit" INT
 
+# open https://iterm2.com/downloads.html
+# general -> preferences -> Load Preferences from a custom folder or url
+#   use '~/home/iterm_configs'
+
 ################################################################################
 echo "=== font setup ==="
 if [ ! -d ~/home/.fonts/ ]; then
