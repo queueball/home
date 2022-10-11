@@ -5,8 +5,8 @@ local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd [[ packadd packer.nvim ]]
     return true
   end
   return false
@@ -24,12 +24,12 @@ vim.g['airline#extensions#tabline#fnamemod'] = ':t'
 --------------------------------------------------------------------------------
 -- direct port of .vimrc
 --------------------------------------------------------------------------------
-vim.cmd [[source ~/.config/nvim/vimscript/custom.vim ]]
+vim.cmd [[ source ~/.config/nvim/vimscript/custom.vim ]]
 
 --------------------------------------------------------------------------------
 -- nvim-lspconfig
 --------------------------------------------------------------------------------
-local opts = { noremap=true, silent=true }  -- `:help vim.diagnostic.*`
+local opts = { noremap = true, silent = true }  -- `:help vim.diagnostic.*`
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -38,7 +38,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }  -- `:help vim.lsp.*`
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }  -- `:help vim.lsp.*`
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -63,7 +63,7 @@ local lsp_flags = {
 --------------------------------------------------------------------------------
 -- Set up nvim-cmp.
 --------------------------------------------------------------------------------
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup({
   snippet = {
@@ -115,24 +115,24 @@ require('lspconfig')['pylsp'].setup{
   capabilities = capabilities,
   settings = {
     pylsp = {
-      configurationSources = {"flake8"},
+      configurationSources = { "flake8" },
       plugins = {
-            jedi_completion = {enabled = true},
-            jedi_hover = {enabled = true},
-            jedi_references = {enabled = true},
-            jedi_signature_help = {enabled = true},
-            jedi_symbols = {enabled = true, all_scopes = true},
-            pycodestyle = {enabled = true},
-            flake8 = {enabled = true},
-            -- mypy = {enabled = true, live_mode=true, disallow_untyped_calls = false},
-            -- isort = {enabled = true},
-            -- yapf = {enabled = false},
-            -- pylint = {enabled = false},
-            -- pydocstyle = {enabled = false},
-            -- mccabe = {enabled = false},
-            -- preload = {enabled = false},
-            -- pyflakes = {enabled=false},
-            -- rope_completion = {enabled =false}
+            jedi_completion = { enabled = true },
+            jedi_hover = { enabled = true },
+            jedi_references = { enabled = true },
+            jedi_signature_help = { enabled = true },
+            jedi_symbols = { enabled = true, all_scopes = true },
+            pycodestyle = { enabled = true },
+            flake8 = { enabled = true },
+            -- mypy = { enabled = true, live_mode = true, disallow_untyped_calls = false },
+            -- isort = { enabled = true },
+            -- yapf = { enabled = false },
+            -- pylint = { enabled = false },
+            -- pydocstyle = { enabled = false },
+            -- mccabe = { enabled = false },
+            -- preload = { enabled = false },
+            -- pyflakes = { enabled = false },
+            -- rope_completion = { enabled = false }
       }
     }
   },
