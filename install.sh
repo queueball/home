@@ -10,11 +10,9 @@ echo "=== font setup ==="
 if [ ! -d ~/home/.fonts/ ]; then
   echo "Cloning & installing useful fonts"
   mkdir -p ~/home/.fonts/
-  # NOTE this is pretty large
+  # NOTE this is pretty large (~5 GB at 2022-10)
   git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/home/.fonts/
   ~/home/.fonts/install.sh Hack
-  # For graphical versions of VIM
-  # echo "set guifont=Hack\ Nerd\ Font\ Mono:h12" >> ~/.gvimrc
 else
   echo "\talready installed fonts"
 fi
@@ -25,8 +23,6 @@ if [ ! -L ~/.config/nvim/init.lua ]; then
   echo "Symlink nvim init.lua"
   mkdir -p ~/.config
   ln -s -f ~/home/nvim ~/.config/nvim
-  # ln -s -f ~/home/init.lua ~/.config/nvim/init.lua
-  # ln -s -f ~/home/custom.vim ~/.config/nvim/vimscript/custom.vim
 else
   echo "\talready symlinked vimrc"
 fi
@@ -117,7 +113,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     docker
     firefox
     iina
-    # macvim
     raspberry-pi-imager
     roku-remote-tool
     signal
