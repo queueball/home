@@ -38,9 +38,9 @@
 [init]
   defaultBranch = main
 [includeIf "gitdir:~/.tech/"]
-  path = ~/home/.gitconfig-home
+  path = ~/home/git_configs/.gitconfig-home
 [includeIf "gitdir:~/home/"]
-  path = ~/home/.gitconfig-home
+  path = ~/home/git_configs/.gitconfig-home
 [color]
   diff = always
   status = always

@@ -13,6 +13,7 @@ if [ ! -d ~/home/.fonts/ ]; then
   # NOTE this is pretty large (~5 GB at 2022-10)
   git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/home/.fonts/
   ~/home/.fonts/install.sh Hack
+  rm -r ~/home/.fonts/
 else
   echo "\talready installed fonts"
 fi
@@ -38,7 +39,7 @@ fi
 echo "=== git customizations ==="
 if [ ! -L ~/.gitconfig ]; then
   echo "Symlink gitconfig"
-  ln -s ~/home/.gitconfig ~/.gitconfig
+  ln -s ~/home/git_configs/.gitconfig ~/.gitconfig
 else
   echo "\talready symlinked .gitconfig"
 fi
@@ -49,7 +50,7 @@ if [ -n $ZSH_VERSION ]; then
   if [ ! -L ~/.zshrc ]; then
     echo "Symlink zsh files"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    ln -s ~/home/.zshrc ~/.zshrc
+    ln -s ~/home/zsh_configs/.zshrc ~/.zshrc
   else
     echo "\talready symlinked .zshrc"
   fi

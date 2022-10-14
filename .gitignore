@@ -1,8 +1,8 @@
 .DS_Store
 tmp.vim
 .netrwhist
-.vim/autoload
-.vim/bundle
-.vim/black
+vim/.vim/autoload
+vim/.vim/bundle
+vim/.vim/black
 .fonts
 nvim/plugin/packer_compiled.lua
