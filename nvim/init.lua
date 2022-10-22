@@ -109,7 +109,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 --------------------------------------------------------------------------------
 -- Start the lsp
 --------------------------------------------------------------------------------
-require('lspconfig')['pylsp'].setup{
+local lspconfig = require('lspconfig')
+lspconfig.pylsp.setup{
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -138,7 +139,7 @@ require('lspconfig')['pylsp'].setup{
   },
 }
 
-require('lspconfig')['sumneko_lua'].setup{
+lspconfig.sumneko_lua.setup{
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -149,6 +150,18 @@ require('lspconfig')['sumneko_lua'].setup{
       },
     },
   },
+}
+
+lspconfig.dockerls.setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+lspconfig.bashls.setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
 }
 
 --------------------------------------------------------------------------------
@@ -179,6 +192,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
 
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   use "williamboman/mason.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim

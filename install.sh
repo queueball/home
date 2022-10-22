@@ -20,12 +20,12 @@ fi
 
 ################################################################################
 echo "=== nvim customizations ==="
-if [ ! -L ~/.config/nvim/init.lua ]; then
+if [ ! -d ~/.config/nvim ]; then
   echo "Symlink nvim init.lua"
   mkdir -p ~/.config
   ln -s -f ~/home/nvim ~/.config/nvim
 else
-  echo "\talready symlinked vimrc"
+  echo "\talready symlinked nvim"
 fi
 
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
@@ -82,6 +82,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     gaze
     git
     neovim
+    node
     python3
     syncthing
     the_silver_searcher
