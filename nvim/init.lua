@@ -138,6 +138,24 @@ require('lspconfig')['pylsp'].setup{
   },
 }
 
+require('lspconfig')['sumneko_lua'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+}
+
+--------------------------------------------------------------------------------
+-- mason package manager
+--------------------------------------------------------------------------------
+require("mason").setup()
+
 --------------------------------------------------------------------------------
 -- manage the plugins
 --------------------------------------------------------------------------------
@@ -160,6 +178,8 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
+
+  use "williamboman/mason.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -21,9 +21,6 @@ pytest-watch
 lz4
 psutil
 
-# nvim modules
-python-lsp-server[all]
-
 # code editing modules
 flake8
 isort
