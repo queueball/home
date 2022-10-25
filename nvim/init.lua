@@ -15,11 +15,14 @@ end
 local packer_bootstrap = ensure_packer()
 
 --------------------------------------------------------------------------------
--- airline (status bar)
+-- status bar
 --------------------------------------------------------------------------------
-vim.g['airline#extensions#tabline#enabled'] = 1
-vim.g['airline_powerline_fonts'] = 1
-vim.g['airline#extensions#tabline#fnamemod'] = ':t'
+require('lualine').setup{
+  options = {
+    themes = 'horizon',
+  },
+}
+
 
 --------------------------------------------------------------------------------
 -- direct port of .vimrc
@@ -35,7 +38,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
   local bufopts = { noremap = true, silent = true, buffer = bufnr }  -- `:help vim.lsp.*`
@@ -182,8 +185,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-vinegar' -- simpler navigation
 
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+  use 'nvim-lualine/lualine.nvim'
 
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'  -- autocompletion, no func signatures
