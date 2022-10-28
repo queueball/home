@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[ packadd packer.nvim ]]
@@ -15,24 +15,35 @@ end
 local packer_bootstrap = ensure_packer()
 
 --------------------------------------------------------------------------------
--- status bar
---------------------------------------------------------------------------------
-require('lualine').setup{
-  options = {
-    themes = 'horizon',
-  },
-}
-
-
---------------------------------------------------------------------------------
 -- direct port of .vimrc
 --------------------------------------------------------------------------------
 vim.cmd [[ source ~/.config/nvim/vimscript/custom.vim ]]
 
 --------------------------------------------------------------------------------
+-- theme
+--------------------------------------------------------------------------------
+require('vscode').setup {}
+
+--------------------------------------------------------------------------------
+-- status bar
+--------------------------------------------------------------------------------
+require('lualine').setup {
+  options = { theme = 'vscode' },
+  tabline = {
+    lualine_a = { 'buffers' },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = { 'tabs' },
+  }
+}
+
+
+--------------------------------------------------------------------------------
 -- nvim-lspconfig
 --------------------------------------------------------------------------------
-local opts = { noremap = true, silent = true }  -- `:help vim.diagnostic.*`
+local opts = { noremap = true, silent = true } -- `:help vim.diagnostic.*`
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -41,7 +52,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }  -- `:help vim.lsp.*`
+  local bufopts = { noremap = true, silent = true, buffer = bufnr } -- `:help vim.lsp.*`
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -60,7 +71,7 @@ local on_attach = function(_, bufnr)
 end
 
 local lsp_flags = {
-  debounce_text_changes = 150,  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150, -- This is the default in Nvim 0.7+
 }
 
 --------------------------------------------------------------------------------
@@ -113,7 +124,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 -- Start the lsp
 --------------------------------------------------------------------------------
 local lspconfig = require('lspconfig')
-lspconfig.pylsp.setup{
+lspconfig.pylsp.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -121,28 +132,28 @@ lspconfig.pylsp.setup{
     pylsp = {
       configurationSources = { "flake8" },
       plugins = {
-            jedi_completion = { enabled = true },
-            jedi_hover = { enabled = true },
-            jedi_references = { enabled = true },
-            jedi_signature_help = { enabled = true },
-            jedi_symbols = { enabled = true, all_scopes = true },
-            pycodestyle = { enabled = true },
-            flake8 = { enabled = true },
-            -- mypy = { enabled = true, live_mode = true, disallow_untyped_calls = false },
-            -- isort = { enabled = true },
-            -- yapf = { enabled = false },
-            -- pylint = { enabled = false },
-            -- pydocstyle = { enabled = false },
-            -- mccabe = { enabled = false },
-            -- preload = { enabled = false },
-            -- pyflakes = { enabled = false },
-            -- rope_completion = { enabled = false }
+        jedi_completion = { enabled = true },
+        jedi_hover = { enabled = true },
+        jedi_references = { enabled = true },
+        jedi_signature_help = { enabled = true },
+        jedi_symbols = { enabled = true, all_scopes = true },
+        pycodestyle = { enabled = true },
+        flake8 = { enabled = true },
+        -- mypy = { enabled = true, live_mode = true, disallow_untyped_calls = false },
+        -- isort = { enabled = true },
+        -- yapf = { enabled = false },
+        -- pylint = { enabled = false },
+        -- pydocstyle = { enabled = false },
+        -- mccabe = { enabled = false },
+        -- preload = { enabled = false },
+        -- pyflakes = { enabled = false },
+        -- rope_completion = { enabled = false }
       }
     }
   },
 }
 
-lspconfig.sumneko_lua.setup{
+lspconfig.sumneko_lua.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -155,13 +166,13 @@ lspconfig.sumneko_lua.setup{
   },
 }
 
-lspconfig.dockerls.setup{
+lspconfig.dockerls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
 }
 
-lspconfig.bashls.setup{
+lspconfig.bashls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
   capabilities = capabilities,
@@ -185,10 +196,11 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-vinegar' -- simpler navigation
 
+  use 'Mofiqul/vscode.nvim'
   use 'nvim-lualine/lualine.nvim'
 
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-cmp'  -- autocompletion, no func signatures
+  use 'hrsh7th/nvim-cmp' -- autocompletion, no func signatures
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-vsnip'
