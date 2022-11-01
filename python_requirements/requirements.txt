@@ -24,3 +24,4 @@ psutil
 # code editing modules
 flake8
 isort
+black
