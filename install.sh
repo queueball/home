@@ -116,6 +116,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     firefox
     iina
     raspberry-pi-imager
+    rectangle
     roku-remote-tool
     signal
     steam
