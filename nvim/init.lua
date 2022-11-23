@@ -173,6 +173,24 @@ lspconfig.bashls.setup {
   capabilities = capabilities,
 }
 
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+lspconfig.html.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
+lspconfig.cssls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+}
+
 --------------------------------------------------------------------------------
 -- mason package manager
 --------------------------------------------------------------------------------
