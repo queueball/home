@@ -39,30 +39,30 @@ require('lualine').setup {
 -- nvim-lspconfig
 --------------------------------------------------------------------------------
 local opts = { noremap = true, silent = true } -- `:help vim.diagnostic.*`
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n' , '<leader>e' , vim.diagnostic.open_float , opts)
+vim.keymap.set('n' , '[d'        , vim.diagnostic.goto_prev  , opts)
+vim.keymap.set('n' , ']d'        , vim.diagnostic.goto_next  , opts)
+vim.keymap.set('n' , '<leader>q' , vim.diagnostic.setloclist , opts)
 
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
   local bufopts = { noremap = true, silent = true, buffer = bufnr } -- `:help vim.lsp.*`
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<leader>wl', function()
+  vim.keymap.set('n' , 'gD'         , vim.lsp.buf.declaration             , bufopts)
+  vim.keymap.set('n' , 'gd'         , vim.lsp.buf.definition              , bufopts)
+  vim.keymap.set('n' , 'K'          , vim.lsp.buf.hover                   , bufopts)
+  vim.keymap.set('n' , 'gi'         , vim.lsp.buf.implementation          , bufopts)
+  vim.keymap.set('n' , '<C-k>'      , vim.lsp.buf.signature_help          , bufopts)
+  vim.keymap.set('n' , '<leader>wa' , vim.lsp.buf.add_workspace_folder    , bufopts)
+  vim.keymap.set('n' , '<leader>wr' , vim.lsp.buf.remove_workspace_folder , bufopts)
+  vim.keymap.set('n' , '<leader>wl' , function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
+  vim.keymap.set('n' , '<leader>D'  , vim.lsp.buf.type_definition , bufopts)
+  vim.keymap.set('n' , '<leader>r'  , vim.lsp.buf.rename          , bufopts)
+  vim.keymap.set('n' , '<leader>ca' , vim.lsp.buf.code_action     , bufopts)
+  vim.keymap.set('n' , 'gr'         , vim.lsp.buf.references      , bufopts)
+  vim.keymap.set('n' , '<leader>f'  , vim.lsp.buf.format          , bufopts)
 end
 
 local lsp_flags = {
@@ -81,11 +81,11 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
+    ['<C-f>']     = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-e>']     = cmp.mapping.abort(),
+    ['<CR>']      = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -119,6 +119,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 -- Start the lsp
 --------------------------------------------------------------------------------
 local lspconfig = require('lspconfig')
+
 lspconfig.pylsp.setup {
   on_attach = on_attach,
   flags = lsp_flags,
@@ -127,21 +128,21 @@ lspconfig.pylsp.setup {
     pylsp = {
       configurationSources = { "flake8" },
       plugins = {
-        jedi_completion = { enabled = true },
-        jedi_hover = { enabled = true },
-        jedi_references = { enabled = true },
+        jedi_completion     = { enabled = true },
+        jedi_hover          = { enabled = true },
+        jedi_references     = { enabled = true },
         jedi_signature_help = { enabled = true },
-        jedi_symbols = { enabled = true, all_scopes = true },
+        jedi_symbols        = { enabled = true, all_scopes = true },
         pycodestyle = { enabled = true },
-        flake8 = { enabled = true },
-        -- mypy = { enabled = true, live_mode = true, disallow_untyped_calls = false },
-        -- isort = { enabled = true },
-        -- yapf = { enabled = false },
-        -- pylint = { enabled = false },
-        -- pydocstyle = { enabled = false },
-        -- mccabe = { enabled = false },
-        -- preload = { enabled = false },
-        -- pyflakes = { enabled = false },
+        flake8      = { enabled = true },
+        -- mypy            = { enabled = true, live_mode = true, disallow_untyped_calls = false },
+        -- isort           = { enabled = true },
+        -- yapf            = { enabled = false },
+        -- pylint          = { enabled = false },
+        -- pydocstyle      = { enabled = false },
+        -- mccabe          = { enabled = false },
+        -- preload         = { enabled = false },
+        -- pyflakes        = { enabled = false },
         -- rope_completion = { enabled = false }
       }
     }
@@ -161,35 +162,22 @@ lspconfig.sumneko_lua.setup {
   },
 }
 
-lspconfig.dockerls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
+local lsps_with_defaults = {
+  'bashls',
+  'cssls',
+  'dockerls',
+  'html',
+  'tsserver',
+  'yamlls',
 }
 
-lspconfig.bashls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-lspconfig.html.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
-
-lspconfig.cssls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-}
+for _, value in pairs(lsps_with_defaults) do
+  lspconfig[value].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+  }
+end
 
 --------------------------------------------------------------------------------
 -- mason package manager
@@ -207,7 +195,6 @@ vim.cmd [[ source ~/.config/nvim/vimscript/custom.vim ]]
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  -- PackerInstall (may require restarting nvim)
   use 'https://github.com/godlygeek/tabular.git'
 
   use 'tpope/vim-repeat'
