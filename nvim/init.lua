@@ -17,7 +17,7 @@ local packer_bootstrap = ensure_packer()
 --------------------------------------------------------------------------------
 -- theme
 --------------------------------------------------------------------------------
-require('vscode').setup {}
+require("vscode").setup {}
 
 --------------------------------------------------------------------------------
 -- status bar
@@ -48,21 +48,19 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
 
   local bufopts = { noremap = true, silent = true, buffer = bufnr } -- `:help vim.lsp.*`
-  vim.keymap.set('n' , 'gD'         , vim.lsp.buf.declaration             , bufopts)
-  vim.keymap.set('n' , 'gd'         , vim.lsp.buf.definition              , bufopts)
-  vim.keymap.set('n' , 'K'          , vim.lsp.buf.hover                   , bufopts)
-  vim.keymap.set('n' , 'gi'         , vim.lsp.buf.implementation          , bufopts)
-  vim.keymap.set('n' , '<C-k>'      , vim.lsp.buf.signature_help          , bufopts)
-  vim.keymap.set('n' , '<leader>wa' , vim.lsp.buf.add_workspace_folder    , bufopts)
-  vim.keymap.set('n' , '<leader>wr' , vim.lsp.buf.remove_workspace_folder , bufopts)
-  vim.keymap.set('n' , '<leader>wl' , function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n' , '<leader>D'  , vim.lsp.buf.type_definition , bufopts)
-  vim.keymap.set('n' , '<leader>r'  , vim.lsp.buf.rename          , bufopts)
-  vim.keymap.set('n' , '<leader>ca' , vim.lsp.buf.code_action     , bufopts)
-  vim.keymap.set('n' , 'gr'         , vim.lsp.buf.references      , bufopts)
-  vim.keymap.set('n' , '<leader>f'  , vim.lsp.buf.format          , bufopts)
+  vim.keymap.set('n' , 'gD'         , vim.lsp.buf.declaration                                                 , bufopts)
+  vim.keymap.set('n' , 'gd'         , vim.lsp.buf.definition                                                  , bufopts)
+  vim.keymap.set('n' , 'K'          , vim.lsp.buf.hover                                                       , bufopts)
+  vim.keymap.set('n' , 'gi'         , vim.lsp.buf.implementation                                              , bufopts)
+  vim.keymap.set('n' , '<C-k>'      , vim.lsp.buf.signature_help                                              , bufopts)
+  vim.keymap.set('n' , '<leader>wa' , vim.lsp.buf.add_workspace_folder                                        , bufopts)
+  vim.keymap.set('n' , '<leader>wr' , vim.lsp.buf.remove_workspace_folder                                     , bufopts)
+  vim.keymap.set('n' , '<leader>wl' , function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end , bufopts)
+  vim.keymap.set('n' , '<leader>D'  , vim.lsp.buf.type_definition                                             , bufopts)
+  vim.keymap.set('n' , '<leader>r'  , vim.lsp.buf.rename                                                      , bufopts)
+  vim.keymap.set('n' , '<leader>ca' , vim.lsp.buf.code_action                                                 , bufopts)
+  vim.keymap.set('n' , 'gr'         , vim.lsp.buf.references                                                  , bufopts)
+  vim.keymap.set('n' , '<leader>f'  , vim.lsp.buf.format                                                      , bufopts)
 end
 
 local lsp_flags = {
@@ -162,27 +160,18 @@ lspconfig.sumneko_lua.setup {
   },
 }
 
-local lsps_with_defaults = {
-  'bashls',
-  'cssls',
-  'dockerls',
-  'html',
-  'tsserver',
-  'yamlls',
+--------------------------------------------------------------------------------
+-- vanilla setups
+--------------------------------------------------------------------------------
+local vanilla_setups = {
+  "mason",           -- LSP management
+  "mason-lspconfig", -- LSP management
+  "which-key",       -- utilities
 }
 
-for _, value in pairs(lsps_with_defaults) do
-  lspconfig[value].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-  }
+for _, value in pairs(vanilla_setups) do
+  require(value).setup()
 end
-
---------------------------------------------------------------------------------
--- mason package manager
---------------------------------------------------------------------------------
-require("mason").setup()
 
 --------------------------------------------------------------------------------
 -- direct port of .vimrc
@@ -213,6 +202,9 @@ return require('packer').startup(function(use)
 
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
+
+  use "folke/which-key.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
