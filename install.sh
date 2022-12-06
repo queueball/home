@@ -79,7 +79,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     cmake
     exiftool
     ffmpeg
-    gaze
     git
     neovim
     node
