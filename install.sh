@@ -110,16 +110,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   echo "=== Cask customizations ==="
   declare -a cask_libs=(
+    # brew list --cask
     android-file-transfer
     docker
     firefox
+    hot
     iina
+    macs-fan-control
     raspberry-pi-imager
     rectangle
     roku-remote-tool
     signal
     steam
     turbo-boost-switcher
+    zoom
   )
   for (( i = 0; i < ${#cask_libs[@]}; i ++ )); do
     if ! brew ls --cask --versions ${cask_libs[$i]} > /dev/null; then
