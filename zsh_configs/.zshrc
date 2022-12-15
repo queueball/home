@@ -56,3 +56,5 @@ fi
 alias reload='source ~/.zshrc'              # makes testing zshrc changes easier
 alias qf='find . -iname'
 alias vim='nvim'
+
+source /Users/queueball/.docker/init-zsh.sh || true # Added by Docker Desktop
