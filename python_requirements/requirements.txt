@@ -25,3 +25,6 @@ psutil
 flake8
 isort
 black
+
+# dockerwatcher support
+pyyaml
