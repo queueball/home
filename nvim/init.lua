@@ -15,60 +15,27 @@ end
 local packer_bootstrap = ensure_packer()
 
 --------------------------------------------------------------------------------
--- theme
---------------------------------------------------------------------------------
-require("vscode").setup {}
-
---------------------------------------------------------------------------------
 -- status bar
 --------------------------------------------------------------------------------
+require("vscode").setup {}  -- theme
 require('lualine').setup {
   options = { theme = 'vscode' },
   tabline = {
     lualine_a = { 'buffers' },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
     lualine_z = { 'tabs' },
   }
 }
+--------------------------------------------------------------------------------
+-- diagnostic helpers
+--------------------------------------------------------------------------------
+vim.keymap.set('n' , '<leader>e' , vim.diagnostic.open_float , { noremap = true, silent = true })
+vim.keymap.set('n' , '[d'        , vim.diagnostic.goto_prev  , { noremap = true, silent = true })
+vim.keymap.set('n' , ']d'        , vim.diagnostic.goto_next  , { noremap = true, silent = true })
+vim.keymap.set('n' , '<leader>q' , vim.diagnostic.setloclist , { noremap = true, silent = true })
 
 
 --------------------------------------------------------------------------------
--- nvim-lspconfig
---------------------------------------------------------------------------------
-local opts = { noremap = true, silent = true } -- `:help vim.diagnostic.*`
-vim.keymap.set('n' , '<leader>e' , vim.diagnostic.open_float , opts)
-vim.keymap.set('n' , '[d'        , vim.diagnostic.goto_prev  , opts)
-vim.keymap.set('n' , ']d'        , vim.diagnostic.goto_next  , opts)
-vim.keymap.set('n' , '<leader>q' , vim.diagnostic.setloclist , opts)
-
-local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
-
-  local bufopts = { noremap = true, silent = true, buffer = bufnr } -- `:help vim.lsp.*`
-  vim.keymap.set('n' , 'gD'         , vim.lsp.buf.declaration                                                 , bufopts)
-  vim.keymap.set('n' , 'gd'         , vim.lsp.buf.definition                                                  , bufopts)
-  vim.keymap.set('n' , 'K'          , vim.lsp.buf.hover                                                       , bufopts)
-  vim.keymap.set('n' , 'gi'         , vim.lsp.buf.implementation                                              , bufopts)
-  vim.keymap.set('n' , '<C-k>'      , vim.lsp.buf.signature_help                                              , bufopts)
-  vim.keymap.set('n' , '<leader>wa' , vim.lsp.buf.add_workspace_folder                                        , bufopts)
-  vim.keymap.set('n' , '<leader>wr' , vim.lsp.buf.remove_workspace_folder                                     , bufopts)
-  vim.keymap.set('n' , '<leader>wl' , function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end , bufopts)
-  vim.keymap.set('n' , '<leader>D'  , vim.lsp.buf.type_definition                                             , bufopts)
-  vim.keymap.set('n' , '<leader>r'  , vim.lsp.buf.rename                                                      , bufopts)
-  vim.keymap.set('n' , '<leader>ca' , vim.lsp.buf.code_action                                                 , bufopts)
-  vim.keymap.set('n' , 'gr'         , vim.lsp.buf.references                                                  , bufopts)
-  vim.keymap.set('n' , '<leader>f'  , vim.lsp.buf.format                                                      , bufopts)
-end
-
-local lsp_flags = {
-  debounce_text_changes = 150, -- This is the default in Nvim 0.7+
-}
-
---------------------------------------------------------------------------------
--- Set up nvim-cmp.
+-- Set up nvim-cmp
 --------------------------------------------------------------------------------
 local cmp = require('cmp')
 
@@ -101,15 +68,27 @@ cmp.setup.cmdline('/', {
   }
 })
 
--- Use cmdline & path source for ':' (incompatible with `native_menu`).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
+--------------------------------------------------------------------------------
+-- nvim-lspconfig
+--------------------------------------------------------------------------------
+
+local on_attach = function(_, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
+
+  vim.keymap.set('n' , 'gD'         , vim.lsp.buf.declaration                                                 , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , 'gd'         , vim.lsp.buf.definition                                                  , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , 'K'          , vim.lsp.buf.hover                                                       , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , 'gi'         , vim.lsp.buf.implementation                                              , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<C-k>'      , vim.lsp.buf.signature_help                                              , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>wa' , vim.lsp.buf.add_workspace_folder                                        , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>wr' , vim.lsp.buf.remove_workspace_folder                                     , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>wl' , function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>D'  , vim.lsp.buf.type_definition                                             , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>r'  , vim.lsp.buf.rename                                                      , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>ca' , vim.lsp.buf.code_action                                                 , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , 'gr'         , vim.lsp.buf.references                                                  , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>f'  , vim.lsp.buf.format                                                      , { noremap = true, silent = true, buffer = bufnr })
+end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -120,7 +99,6 @@ local lspconfig = require('lspconfig')
 
 lspconfig.pylsp.setup {
   on_attach = on_attach,
-  flags = lsp_flags,
   capabilities = capabilities,
   settings = {
     pylsp = {
@@ -133,15 +111,6 @@ lspconfig.pylsp.setup {
         jedi_symbols        = { enabled = true, all_scopes = true },
         pycodestyle = { enabled = true },
         flake8      = { enabled = true },
-        -- mypy            = { enabled = true, live_mode = true, disallow_untyped_calls = false },
-        -- isort           = { enabled = true },
-        -- yapf            = { enabled = false },
-        -- pylint          = { enabled = false },
-        -- pydocstyle      = { enabled = false },
-        -- mccabe          = { enabled = false },
-        -- preload         = { enabled = false },
-        -- pyflakes        = { enabled = false },
-        -- rope_completion = { enabled = false }
       }
     }
   },
@@ -149,7 +118,6 @@ lspconfig.pylsp.setup {
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
-  flags = lsp_flags,
   capabilities = capabilities,
   settings = {
     Lua = {
