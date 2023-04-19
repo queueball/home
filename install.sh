@@ -77,6 +77,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # brew leaves -r
     cask
     cmake
+    comby
     exiftool
     ffmpeg
     git
