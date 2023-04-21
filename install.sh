@@ -118,6 +118,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     hot
     iina
     macs-fan-control
+    microsoft-edge
     raspberry-pi-imager
     rectangle
     roku-remote-tool
