@@ -28,3 +28,6 @@ black
 
 # dockerwatcher support
 pyyaml
+
+# for parsing html
+bs4
