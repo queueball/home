@@ -31,3 +31,4 @@ pyyaml
 
 # for parsing html
 bs4
+lxml
