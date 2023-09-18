@@ -7,6 +7,7 @@ pip
 
 # better versions of the built in functions
 requests
+certifi
 click
 
 # prettify lists and lists of lists
@@ -32,3 +33,7 @@ pyyaml
 # for parsing html
 bs4
 lxml
+
+# for pdf parsing
+PyMuPDF
+
