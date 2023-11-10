@@ -1,10 +1,10 @@
-HISTSIZE=10000
+HISTSIZE=100000
 if (( ! EUID )); then
   HISTFILE=~/.history_root
 else
   HISTFILE=~/.history
 fi
-SAVEHIST=10000
+SAVEHIST=100000
 
 export ZSH="/Users/queueball/.oh-my-zsh"
 ZSH_THEME="agnoster"
