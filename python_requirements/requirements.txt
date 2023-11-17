@@ -10,9 +10,6 @@ requests
 certifi
 click
 
-# prettify lists and lists of lists
-tabulate
-
 # test all the things
 pytest
 pytest-cov
