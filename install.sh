@@ -112,7 +112,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "=== Cask customizations ==="
   declare -a cask_libs=(
     # brew list --cask
-    android-file-transfer
     docker
     firefox
     hot
