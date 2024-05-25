@@ -45,7 +45,7 @@ setopt histignorespace                      # do not store a command if prepende
 
 ################################################################################
 # Homebrew path fix
-export PATH="/usr/local/sbin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ################################################################################
 # Custom paths for my custom scripts, want bash to override python in the event
@@ -55,8 +55,8 @@ export PATH="$PATH:$HOME/.bin"
 
 ################################################################################
 # Switch to nvim for the shells EDITOR and VISUAL instead of (nano?)
-export EDITOR="/usr/local/bin/nvim"
-export VISUAL="/usr/local/bin/nvim"
+export EDITOR="/opt/homebrew/bin/nvim"
+export VISUAL="/opt/homebrew/bin/nvim"
 
 ################################################################################
 # environmental quality of life improvments
@@ -98,4 +98,4 @@ alias qf='find . -iname'
 # Remap vim to nvim
 alias vim='nvim'
 
-source /Users/queueball/.docker/init-zsh.sh || true # Added by Docker Desktop
+# source /Users/queueball/.docker/init-zsh.sh || true # Added by Docker Desktop

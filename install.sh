@@ -77,7 +77,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # brew leaves -r
     cask
     cmake
-    comby
     exiftool
     ffmpeg
     git
@@ -114,17 +113,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # brew list --cask
     docker
     firefox
-    hot
     iina
-    macs-fan-control
-    microsoft-edge
     raspberry-pi-imager
     rectangle
-    roku-remote-tool
-    signal
     steam
-    turbo-boost-switcher
     zoom
+    plex
   )
   for (( i = 0; i < ${#cask_libs[@]}; i ++ )); do
     if ! brew ls --cask --versions ${cask_libs[$i]} > /dev/null; then
