@@ -63,6 +63,7 @@ export VISUAL="/opt/homebrew/bin/nvim"
 export PYTHONDONTWRITEBYTECODE="IGNORE"     # turns off creating pyc files
 export _PIP_LOCATIONS_NO_WARN_ON_MISMATCH=1 # suppress pip warnings while switching to sysconfig
 export DOCKER_SCAN_SUGGEST=false            # remove synk advertising
+export HOMEBREW_NO_ENV_HINTS=1              # remove homebrew hints
 
 ################################################################################
 # On double <tab> show a table of the possible completions and then press
