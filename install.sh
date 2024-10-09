@@ -90,6 +90,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     watch
     wget
     yt-dlp
+    bambu-studio
+    blender
+    orcaslicer
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
     if ! brew ls --versions ${brew_libs[$i]} > /dev/null; then
