@@ -93,6 +93,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     bambu-studio
     blender
     orcaslicer
+    ncdu
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
     if ! brew ls --versions ${brew_libs[$i]} > /dev/null; then
