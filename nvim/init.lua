@@ -95,9 +95,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 --------------------------------------------------------------------------------
 -- Start the lsp
 --------------------------------------------------------------------------------
-local lspconfig = require('lspconfig')
-
-lspconfig.pylsp.setup {
+vim.lsp.config("pylsp", {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -114,9 +112,9 @@ lspconfig.pylsp.setup {
       }
     }
   },
-}
+})
 
-lspconfig.lua_ls.setup {
+vim.lsp.config("lua_ls", {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -126,7 +124,7 @@ lspconfig.lua_ls.setup {
       },
     },
   },
-}
+})
 
 --------------------------------------------------------------------------------
 -- vanilla setups
