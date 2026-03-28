@@ -1,18 +1,48 @@
 --------------------------------------------------------------------------------
--- on initial setup, handle adding the package manager
+-- lazy.nvim bootstrap
 --------------------------------------------------------------------------------
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-    vim.cmd [[ packadd packer.nvim ]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
+--------------------------------------------------------------------------------
+-- plugin management
+--------------------------------------------------------------------------------
+require("lazy").setup({
+  -- Utilities
+  "godlygeek/tabular",
+  "tpope/vim-repeat",
+  "tpope/vim-surround",
+  "tpope/vim-vinegar",
+
+  -- UI / Theme
+  "Mofiqul/vscode.nvim",
+  "nvim-lualine/lualine.nvim",
+
+  -- LSP / Completion
+  "neovim/nvim-lspconfig",
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-vsnip",
+  "hrsh7th/vim-vsnip",
+
+  -- Mason
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+
+  -- Utilities
+  "folke/which-key.nvim",
+})
 
 --------------------------------------------------------------------------------
 -- status bar
@@ -25,6 +55,7 @@ require('lualine').setup {
     lualine_z = { 'tabs' },
   }
 }
+
 --------------------------------------------------------------------------------
 -- diagnostic helpers
 --------------------------------------------------------------------------------
@@ -33,7 +64,6 @@ vim.keymap.set('n' , '[d'        , vim.diagnostic.goto_prev  , { noremap = true,
 vim.keymap.set('n' , ']d'        , vim.diagnostic.goto_next  , { noremap = true, silent = true })
 vim.keymap.set('n' , '<leader>q' , vim.diagnostic.setloclist , { noremap = true, silent = true })
 
-
 --------------------------------------------------------------------------------
 -- Set up nvim-cmp
 --------------------------------------------------------------------------------
@@ -41,8 +71,8 @@ local cmp = require('cmp')
 
 cmp.setup({
   snippet = {
-    expand = function(args) -- REQUIRED - you must specify a snippet engine
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -50,7 +80,7 @@ cmp.setup({
     ['<C-f>']     = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>']     = cmp.mapping.abort(),
-    ['<CR>']      = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>']      = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -60,7 +90,6 @@ cmp.setup({
   })
 })
 
--- Use buffer source for `/` (incompatible with `native_menu`).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -71,15 +100,14 @@ cmp.setup.cmdline('/', {
 --------------------------------------------------------------------------------
 -- nvim-lspconfig
 --------------------------------------------------------------------------------
-
 local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc') -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   vim.keymap.set('n' , 'gD'         , vim.lsp.buf.declaration                                                 , { noremap = true, silent = true, buffer = bufnr })
   vim.keymap.set('n' , 'gd'         , vim.lsp.buf.definition                                                  , { noremap = true, silent = true, buffer = bufnr })
   vim.keymap.set('n' , 'K'          , vim.lsp.buf.hover                                                       , { noremap = true, silent = true, buffer = bufnr })
   vim.keymap.set('n' , 'gi'         , vim.lsp.buf.implementation                                              , { noremap = true, silent = true, buffer = bufnr })
-  vim.keymap.set('n' , '<leader>k'      , vim.lsp.buf.signature_help                                              , { noremap = true, silent = true, buffer = bufnr })
+  vim.keymap.set('n' , '<leader>k'  , vim.lsp.buf.signature_help                                              , { noremap = true, silent = true, buffer = bufnr })
   vim.keymap.set('n' , '<leader>wa' , vim.lsp.buf.add_workspace_folder                                        , { noremap = true, silent = true, buffer = bufnr })
   vim.keymap.set('n' , '<leader>wr' , vim.lsp.buf.remove_workspace_folder                                     , { noremap = true, silent = true, buffer = bufnr })
   vim.keymap.set('n' , '<leader>wl' , function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end , { noremap = true, silent = true, buffer = bufnr })
@@ -95,7 +123,9 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 --------------------------------------------------------------------------------
 -- Start the lsp
 --------------------------------------------------------------------------------
-vim.lsp.config("pylsp", {
+local lspconfig = require('lspconfig')
+
+lspconfig.pylsp.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -114,7 +144,7 @@ vim.lsp.config("pylsp", {
   },
 })
 
-vim.lsp.config("lua_ls", {
+lspconfig.lua_ls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -130,12 +160,12 @@ vim.lsp.config("lua_ls", {
 -- vanilla setups
 --------------------------------------------------------------------------------
 local vanilla_setups = {
-  "mason",           -- LSP management
-  "mason-lspconfig", -- LSP management
-  "which-key",       -- utilities
+  "mason",
+  "mason-lspconfig",
+  "which-key",
 }
 
-for _, value in pairs(vanilla_setups) do
+for _, value in ipairs(vanilla_setups) do
   require(value).setup()
 end
 
@@ -143,38 +173,3 @@ end
 -- direct port of .vimrc
 --------------------------------------------------------------------------------
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/vimscript/custom.vim")
-
---------------------------------------------------------------------------------
--- manage the plugins
---------------------------------------------------------------------------------
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-
-  use 'https://github.com/godlygeek/tabular.git'
-
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-vinegar' -- simpler navigation
-
-  use 'Mofiqul/vscode.nvim'
-  use 'nvim-lualine/lualine.nvim'
-
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-cmp' -- autocompletion, no func signatures
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
-
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
-
-  use "folke/which-key.nvim"
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
