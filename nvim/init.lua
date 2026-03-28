@@ -173,3 +173,13 @@ end
 -- direct port of .vimrc
 --------------------------------------------------------------------------------
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/vimscript/custom.vim")
+
+--------------------------------------------------------------------------------
+-- Terminal Cursor Reset
+--------------------------------------------------------------------------------
+-- Resets cursor to terminal default on exit
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    os.execute("printf '\\e[0 q' > /dev/tty")
+  end,
+})
