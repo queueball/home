@@ -19,7 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 --------------------------------------------------------------------------------
 require("lazy").setup({
   -- Utilities
-  "godlygeek/tabular",
+  "echasnovski/mini.align",
   "tpope/vim-repeat",
   "tpope/vim-surround",
   "tpope/vim-vinegar",
@@ -30,11 +30,11 @@ require("lazy").setup({
 
   -- LSP / Completion
   "neovim/nvim-lspconfig",
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-vsnip",
-  "hrsh7th/vim-vsnip",
+  {
+    'saghen/blink.cmp',
+    version = '*', -- use latest stable release
+    dependencies = 'rafamadriz/friendly-snippets',
+  },
 
   -- Mason
   "williamboman/mason.nvim",
@@ -65,36 +65,17 @@ vim.keymap.set('n' , ']d'        , vim.diagnostic.goto_next  , { noremap = true,
 vim.keymap.set('n' , '<leader>q' , vim.diagnostic.setloclist , { noremap = true, silent = true })
 
 --------------------------------------------------------------------------------
--- Set up nvim-cmp
+-- Set up blink.cmp
 --------------------------------------------------------------------------------
-local cmp = require('cmp')
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
+require('blink.cmp').setup({
+  keymap = { preset = 'default' },
+  appearance = {
+    use_nvim_cmp_as_default = true,
+    nerd_font_variant = 'mono'
   },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
-    ['<C-f>']     = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>']     = cmp.mapping.abort(),
-    ['<CR>']      = cmp.mapping.confirm({ select = true }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-
-cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
 })
 
 --------------------------------------------------------------------------------
@@ -118,7 +99,7 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n' , '<leader>f'  , vim.lsp.buf.format                                                      , { noremap = true, silent = true, buffer = bufnr })
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 --------------------------------------------------------------------------------
 -- Start the lsp
@@ -163,6 +144,7 @@ local vanilla_setups = {
   "mason",
   "mason-lspconfig",
   "which-key",
+  "mini.align",
 }
 
 for _, value in ipairs(vanilla_setups) do
