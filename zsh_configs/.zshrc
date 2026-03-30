@@ -100,3 +100,9 @@ alias qf='find . -iname'
 alias vim='nvim'
 
 # source /Users/queueball/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+################################################################################
+# Ensure cursor is always an underscore when the prompt is shown
+precmd() {
+  printf '\033[0 q'
+}

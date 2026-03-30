@@ -15,7 +15,6 @@ opt.number = true                       -- Line numbers
 opt.relativenumber = true               -- Relative line numbers
 opt.shada = "'100,f1"                   -- Save marks between reloads
 opt.cursorline = true                   -- Highlight current line
-opt.guicursor = ""                      -- Disable cursor management by Neovim
 opt.autowrite = true                    -- Save on switch
 opt.autochdir = true                    -- Change dir to current buffer
 opt.laststatus = 3                      -- Global statusline (modern Neovim)
@@ -195,12 +194,3 @@ vim.lsp.enable("lua_ls")
 -- Highlights & Fixes
 --------------------------------------------------------------------------------
 vim.api.nvim_set_hl(0, "markdownError", { link = "Normal" })
-
---------------------------------------------------------------------------------
--- Terminal Cursor Reset
---------------------------------------------------------------------------------
-vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function()
-    os.execute("printf '\\e[0 q' > /dev/tty")
-  end,
-})
