@@ -28,6 +28,8 @@
 	<string>https://api.openai.com/v1/responses</string>
 	<key>AutoCommandHistory</key>
 	<false/>
+	<key>ClickToSelectCommand</key>
+	<false/>
 	<key>Default Bookmark Guid</key>
 	<string>9D71BFBD-4CAE-4035-B400-F9CAE6650077</string>
 	<key>EnableProxyIcon</key>
