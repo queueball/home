@@ -1,9 +1,7 @@
 #!/bin/sh
 trap "exit" INT
 
-# open https://iterm2.com/downloads.html
-# general -> preferences -> Load Preferences from a custom folder or url
-#   use '~/home/iterm_configs'
+# open https://ghostty.org/download
 
 ################################################################################
 echo "=== font setup ==="
@@ -26,13 +24,6 @@ if [ ! -d ~/.config/nvim ]; then
   ln -s -f ~/home/nvim ~/.config/nvim
 else
   echo "\talready symlinked nvim"
-fi
-
-if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
-  echo "\t Cloning packer"
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-else
-  echo "\talready downloaded packer"
 fi
 
 ################################################################################
@@ -90,8 +81,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     watch
     wget
     yt-dlp
-    bambu-studio
-    blender
+    # bambu-studio
+    # blender
     orcaslicer
     ncdu
   )
@@ -115,12 +106,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "=== Cask customizations ==="
   declare -a cask_libs=(
     # brew list --cask
-    docker
+    # docker
     firefox
     iina
-    raspberry-pi-imager
+    # raspberry-pi-imager
     rectangle
-    steam
+    # steam
     zoom
     plex
   )
