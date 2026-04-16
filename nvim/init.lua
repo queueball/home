@@ -18,6 +18,7 @@ opt.cursorline = true                   -- Highlight current line
 opt.autowrite = true                    -- Save on switch
 opt.autochdir = true                    -- Change dir to current buffer
 opt.laststatus = 3                      -- Global statusline (modern Neovim)
+opt.clipboard = "unnamedplus"           -- yanks go to clipboard, fix for ghostty
 
 -- Backup & Swaps
 opt.backup = false
