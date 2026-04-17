@@ -19,6 +19,7 @@ opt.autowrite = true                    -- Save on switch
 opt.autochdir = true                    -- Change dir to current buffer
 opt.laststatus = 3                      -- Global statusline (modern Neovim)
 opt.clipboard = "unnamedplus"           -- yanks go to clipboard, fix for ghostty
+vim.fn.setenv("NVIM_LOG_FILE", "/dev/null")  -- stop spamming nvim.log...
 
 -- Backup & Swaps
 opt.backup = false
