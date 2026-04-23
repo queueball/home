@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ################################################################################
 # Disk space is cheap, so load up on a ton of history
 HISTSIZE=100000
@@ -9,27 +16,18 @@ fi
 SAVEHIST=100000
 
 ################################################################################
-# Load oh-my-zsh
-export ZSH="/Users/queueball/.oh-my-zsh"
+source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 
-################################################################################
-# Make it colorful
-ZSH_THEME="agnoster"
+if [[ ! -f ~/.zsh_plugins.zsh || ~/.zsh_plugins.txt -nt ~/.zsh_plugins.zsh ]]; then
+  antidote bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.zsh
+fi
+source ~/.zsh_plugins.zsh
 
 ################################################################################
 # When autosuggesting commands don't return really long ones
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 ################################################################################
-# load plugins that defined more complex behavior
-plugins=(
-  sudo                                      # <esc><esc> to toggle the last command with sudo in front
-  timer                                     # automatically times a command and reports it on the right side of the terminal
-  zsh-autosuggestions                       # suggest commands as you type
-)
-
-source $ZSH/oh-my-zsh.sh                    # load the omz context
-
 autoload zmv                                # zsh extension with mv that understands zsh patterns
 
 ################################################################################
@@ -66,9 +64,29 @@ export DOCKER_SCAN_SUGGEST=false            # remove synk advertising
 export HOMEBREW_NO_ENV_HINTS=1              # remove homebrew hints
 
 ################################################################################
-# On double <tab> show a table of the possible completions and then press
-# <enter> to select an option
+# FZF integration
+if (( $+commands[fzf] )); then
+  source <(fzf --zsh)
+  export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border=rounded --info=inline"
+
+  if (( $+commands[fd] )); then
+    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  fi
+fi
+
+################################################################################
+# Advanced Completion System
+# 1 Enable menu selection
+# 2 Group completions by type (commands, files, etc)
+# 3 Add descriptive headers to groups
+# 4 Use LS_COLORS for file completions in the menu
+# 5 Case-insensitive and smart matching (can type 'doc' to match 'Documents')
 zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ################################################################################
 # Allows using $EDITOR to modify a commandline entry with <c-x><c-e>
@@ -99,10 +117,6 @@ alias qf='find . -iname'
 # Remap vim to nvim
 alias vim='nvim'
 
-# source /Users/queueball/.docker/init-zsh.sh || true # Added by Docker Desktop
-
 ################################################################################
-# Ensure cursor is always an underscore when the prompt is shown
-precmd() {
-  printf '\033[0 q'
-}
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

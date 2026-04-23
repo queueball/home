@@ -1,0 +1,9 @@
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/timer
+
+# zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+romkatv/powerlevel10k
+
+zsh-users/zsh-completions

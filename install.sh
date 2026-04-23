@@ -11,7 +11,7 @@ if [ ! -d ~/home/.fonts/ ]; then
   # NOTE this is pretty large (~5 GB at 2022-10)
   git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/home/.fonts/
   ~/home/.fonts/install.sh Hack
-  rm -r ~/home/.fonts/
+  rm -rf ~/home/.fonts/
 else
   echo "\talready installed fonts"
 fi
@@ -40,16 +40,16 @@ if [ -n $ZSH_VERSION ]; then
   echo "=== ZSH customizations ==="
   if [ ! -L ~/.zshrc ]; then
     echo "Symlink zsh files"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     ln -s ~/home/zsh_configs/.zshrc ~/.zshrc
   else
     echo "\talready symlinked .zshrc"
   fi
 
-  if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  if [ ! -L ~/.zsh_plugins.txt ]; then
+    echo "Symlink zsh files"
+    ln -s ~/home/zsh_configs/.zsh_plugins.txt ~/.zsh_plugins.txt
   else
-    echo "\talready installed" "zsh-autosuggestions"
+    echo "\talready symlinked .zshrc"
   fi
 fi
 
@@ -85,6 +85,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # blender
     orcaslicer
     ncdu
+    fzf
+    fd
+    antidote
   )
   for (( i = 0; i < ${#brew_libs[@]}; i ++ )); do
     if ! brew ls --versions ${brew_libs[$i]} > /dev/null; then
