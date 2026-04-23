@@ -32,6 +32,7 @@ autoload zmv                                # zsh extension with mv that underst
 
 ################################################################################
 # History and prompt management helpers
+setopt EXTENDED_HISTORY                     # pre-req for timestamps in history
 setopt HIST_IGNORE_ALL_DUPS                 # remove duplicate entries from history (1:1 match)
 setopt PROMPT_SUBST                         # enable substitution in the commands, makes prompt more dynamic
 setopt SHARE_HISTORY                        # share history between zsh instances
@@ -40,6 +41,8 @@ setopt NUMERIC_GLOB_SORT                    # use actual numeric instead of stri
 setopt EXTENDED_GLOB                        # additional globbing support for * patterns
 setopt interactivecomments                  # allow comments in the interactive shell
 setopt histignorespace                      # do not store a command if prepended with space, useful for one off commands not for history
+
+HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 
 ################################################################################
 # Homebrew path fix
@@ -110,8 +113,7 @@ fi
 alias reload='exec zsh -l'
 
 ################################################################################
-# Shortcut for a common find command
-alias qf='find . -iname'
+alias history='history -i'
 
 ################################################################################
 # Remap vim to nvim
