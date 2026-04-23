@@ -2,7 +2,6 @@
 trap "exit" INT
 
 # open https://ghostty.org/download
-
 ################################################################################
 echo "=== font setup ==="
 if [ ! -d ~/home/.fonts/ ]; then
