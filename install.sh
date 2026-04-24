@@ -43,6 +43,7 @@ if [ -n $ZSH_VERSION ]; then
   if [ ! -L ~/.zsh_plugins.txt ]; then
     echo "Symlink zsh files"
     ln -s ~/home/zsh_configs/.zsh_plugins.txt ~/.zsh_plugins.txt
+    ln -s ~/home/zsh_configs/.p10k.zsh ~/.p10k.zsh
   else
     echo "\talready symlinked .zshrc"
   fi
