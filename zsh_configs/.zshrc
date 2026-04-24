@@ -42,8 +42,6 @@ setopt EXTENDED_GLOB                        # additional globbing support for * 
 setopt interactivecomments                  # allow comments in the interactive shell
 setopt histignorespace                      # do not store a command if prepended with space, useful for one off commands not for history
 
-HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
-
 ################################################################################
 # Homebrew path fix
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -73,7 +71,7 @@ if (( $+commands[fzf] )); then
   export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border=rounded --info=inline"
 
   if (( $+commands[fd] )); then
-    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --exclude .cache --exclude .npm --exclude .cagent --exclude .docker --exclude .DS_Store'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   fi
 fi
