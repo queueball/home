@@ -91,6 +91,10 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ################################################################################
+# Keybindings - was defaulting to vi style which feels awkward in the terminal
+# Force emacs mode (Ctrl-a, Ctrl-e, Ctrl-k, etc.)
+bindkey -e
+
 # Allows using $EDITOR to modify a commandline entry with <c-x><c-e>
 autoload -U edit-command-line
 zle -N edit-command-line
