@@ -2,8 +2,6 @@
   autocrlf = false
   editor = vim
   excludesfile = ~/.gitignore
-  filemode = false
-  fscache = true
   repositoryformatversion = 0
   whitespace = cr-at-eol
 [alias]
@@ -29,8 +27,13 @@
 [diff]
   ignoreSubmodules = dirty
   renameLimit = 999999
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [merge]
   renameLimit = 999999
+  conflictstyle = zdiff3
 [pager]
   diff = false
   log = false
@@ -44,3 +47,13 @@
 [color]
   diff = always
   status = always
+[column]
+  ui = auto
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[help]
+  autocorrect = prompt
+[commit]
+  verbose = true

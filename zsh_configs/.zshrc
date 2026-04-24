@@ -41,6 +41,7 @@ setopt NUMERIC_GLOB_SORT                    # use actual numeric instead of stri
 setopt EXTENDED_GLOB                        # additional globbing support for * patterns
 setopt interactivecomments                  # allow comments in the interactive shell
 setopt histignorespace                      # do not store a command if prepended with space, useful for one off commands not for history
+setopt AUTO_CD                              # navigate by just entering a path
 
 ################################################################################
 # Homebrew path fix
