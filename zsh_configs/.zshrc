@@ -126,3 +126,12 @@ alias vim='nvim'
 ################################################################################
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+################################################################################
+# Fix for Powerlevel10k breaking a ghostty feature
+_report_cwd_osc7() {
+  printf "\e]7;file://%s%s\e\\" "$HOST" "$PWD"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _report_cwd_osc7
+_report_cwd_osc7 # Initial report
