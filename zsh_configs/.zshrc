@@ -113,7 +113,11 @@ alias reload='exec zsh -l'
 
 ################################################################################
 alias history='history -i'
-alias ls='gls --color=always'
+if (( $+commands[gls] )); then
+  alias ls='gls --color=auto'
+else
+  alias ls='ls -G'
+fi
 
 ################################################################################
 # Remap vim to nvim
