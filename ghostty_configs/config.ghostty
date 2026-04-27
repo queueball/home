@@ -1,0 +1,11 @@
+# Always open new tabs/splits in the same directory as the current one
+window-inherit-working-directory = true
+
+# For macOS users: use Option as the Alt/Meta key
+macos-option-as-alt = left
+
+# Save split/pane state on exit so you can resume where you left off
+window-save-state = always
+
+# Copy text to clipboard immediately upon selection
+copy-on-select = clipboard

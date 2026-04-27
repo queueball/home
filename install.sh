@@ -2,7 +2,14 @@
 trap "exit" INT
 
 # open https://ghostty.org/download
-#
+echo "=== ghostty setup ==="
+if [ ! -L ~/Library/Application\ Support/com.mitchellh.ghostty/config.ghostty ]; then
+  mkdir ~p ~/Library/Application\ Support/com.mitchellh.ghostty
+  ln -s -f ~/home/ghostty_configs/config.ghostty ~/Library/Application\ Support/com.mitchellh.ghostty/config.ghostty
+else
+  echo "\talready installed config.ghostty"
+fi
+
 ################################################################################
 echo "=== font setup ==="
 if [ ! -d ~/home/.fonts/ ]; then
