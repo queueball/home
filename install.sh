@@ -40,8 +40,15 @@ fi
 ################################################################################
 if [ -n $ZSH_VERSION ]; then
   echo "=== ZSH customizations ==="
+  if [ ! -L ~/.zshenv ]; then
+    echo "Symlink zshenv"
+    ln -s ~/home/zsh_configs/.zshenv ~/.zshenv
+  else
+    echo "\talready symlinked .zshenv"
+  fi
+
   if [ ! -L ~/.zshrc ]; then
-    echo "Symlink zsh files"
+    echo "Symlink zshrc"
     ln -s ~/home/zsh_configs/.zshrc ~/.zshrc
   else
     echo "\talready symlinked .zshrc"
@@ -52,7 +59,7 @@ if [ -n $ZSH_VERSION ]; then
     ln -s ~/home/zsh_configs/.zsh_plugins.txt ~/.zsh_plugins.txt
     ln -s ~/home/zsh_configs/.p10k.zsh ~/.p10k.zsh
   else
-    echo "\talready symlinked .zshrc"
+    echo "\talready symlinked zsh_plugins and p10k"
   fi
 fi
 
