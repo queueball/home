@@ -1,4 +1,3 @@
-getantidote/use-omz
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/timer
 
