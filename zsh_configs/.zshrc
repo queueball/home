@@ -44,6 +44,19 @@ setopt histignorespace                      # do not store a command if prepende
 setopt AUTO_CD                              # navigate by just entering a path
 
 ################################################################################
+# uv
+export PATH="$HOME/.local/bin:$PATH"
+
+################################################################################
+# Custom paths for my custom scripts, want bash to override python in the event
+# of an overlap
+export PATH="$PATH:$HOME/.tech/bash"
+
+################################################################################
+# Homebrew path fix
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+################################################################################
 # FZF integration
 if (( $+commands[fzf] )); then
   source <(fzf --zsh)
