@@ -90,7 +90,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     vim
     watch
     wget
-    yt-dlp
+    # yt-dlp
     # bambu-studio
     # blender
     orcaslicer
