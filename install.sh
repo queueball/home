@@ -86,7 +86,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     python3
     syncthing
     the_silver_searcher
-    transmission-cli
+    # transmission-cli
     vim
     watch
     wget
